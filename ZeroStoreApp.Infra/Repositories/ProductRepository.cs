@@ -1,28 +1,27 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ZeroStoreApp.Domain.Commons;
 using ZeroStoreApp.Domain.Enities;
+using ZeroStoreApp.Domain.Queries;
 using ZeroStoreApp.Domain.Repositories;
 using ZeroStoreApp.Infra.Extensions;
 
 namespace ZeroStoreApp.Infra.Repositories;
 
-internal class ProductRepository : IProductRepository
+internal class ProductRepository : BaseRepository<Product>, IProductRepository
 {
-    private readonly ZeroStoreAppDbContext _context;
-
-    public ProductRepository(ZeroStoreAppDbContext context)
+    public ProductRepository(ZeroStoreAppDbContext context) : base(context)
     {
-        _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public async Task<Product?> AddAsync(Product product, CancellationToken cancellationToken)
-    {
-        _context.Products.Add(product);
-        await _context.SaveChangesAsync(cancellationToken);
-        return product;
-    }
+    //public override async Task<Product?> AddAsync(Product product, CancellationToken cancellationToken)
+    //{
+    //    _context.Products.Add(product);
+    //    await _context.SaveChangesAsync(cancellationToken);
+    //    await _context.Database.BeginTransactionAsync(cancellationToken);
+    //    return product;
+    //}
 
-    public async Task<Product?> DeleteAsync(Guid id, CancellationToken cancellationToken)
+    public override async Task<Product?> DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         var product = await _context.Products.FindAsync(id, cancellationToken);
         if (product is null) return null;
@@ -31,17 +30,17 @@ internal class ProductRepository : IProductRepository
         return product;
     }
 
-    public async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken)
+    //public override async Task<IEnumerable<Product>> GetAllAsync(CancellationToken cancellationToken)
+    //{
+    //    return await _context.Products.ToListAsync(cancellationToken);
+    //}
+
+    public override async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _context.Products.ToListAsync();
+        return await _context.Products.FindAsync(id, cancellationToken);
     }
 
-    public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
-    {
-        return await _context.Products.FindAsync(id);
-    }
-
-    public async Task<PaginatedResult<Product>> GetPaginatedAsync(PaginatedQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedResult<Product>> GetPaginatedAsync(PaginatedProductQuery request, CancellationToken cancellationToken)
     {
         var query = _context.Products.AsQueryable();
         if (!string.IsNullOrWhiteSpace(request.Query))
@@ -51,7 +50,7 @@ internal class ProductRepository : IProductRepository
         return await query.ToPaginatedAsync(request.Page, request.PageSize);
     }
 
-    public async Task<Product?> UpdateAsync(Product product, CancellationToken cancellationToken)
+    public override async Task<Product?> UpdateAsync(Product product, CancellationToken cancellationToken)
     {
         product.Update();
         _context.Products.Update(product);
