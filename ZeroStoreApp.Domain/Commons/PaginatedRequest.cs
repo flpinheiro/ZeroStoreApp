@@ -1,6 +1,6 @@
 ﻿namespace ZeroStoreApp.Domain.Commons;
 
-public abstract record PaginatedQuery
+public abstract record PaginatedRequest
 {
     public int Page { get; init; }
     public int PageSize { get; init; }

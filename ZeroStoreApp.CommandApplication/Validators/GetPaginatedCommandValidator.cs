@@ -1,10 +1,9 @@
 ﻿using FluentValidation;
 using ZeroStoreApp.CommandApplication.Commands;
-using static ZeroStoreApp.CrossCutting.Constants.Definitions;
 
 namespace ZeroStoreApp.CommandApplication.Validators;
 
-public class GetPaginatedCommandValidator: AbstractValidator<GetPaginatedCommand>
+public class GetPaginatedCommandValidator : AbstractValidator<GetPaginatedCommand>
 {
     public GetPaginatedCommandValidator()
     {

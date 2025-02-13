@@ -1,6 +1,6 @@
 ﻿using ZeroStoreApp.Domain.Commons;
 using ZeroStoreApp.Domain.Enities;
-using ZeroStoreApp.Domain.Queries;
+using ZeroStoreApp.Domain.Requests;
 
 namespace ZeroStoreApp.Domain.Repositories;
 
@@ -12,5 +12,5 @@ public interface IProductRepository : IBaseRepository<Product>, IQueryProductRep
 
 public interface IQueryProductRepRepository : IBaseQueryRepository<Product>
 {
-    Task<PaginatedResult<Product>> GetPaginatedAsync(PaginatedProductQuery request, CancellationToken cancellationToken);
+    Task<PaginatedResult<Product>> GetPaginatedAsync(PaginatedProductRequest request, CancellationToken cancellationToken);
 }

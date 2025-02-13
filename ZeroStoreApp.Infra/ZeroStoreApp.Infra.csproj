@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ZeroStoreApp.CrossCutting\ZeroStoreApp.CrossCutting.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.Domain\ZeroStoreApp.Domain.csproj" />
   </ItemGroup>
 

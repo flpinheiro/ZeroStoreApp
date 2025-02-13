@@ -8,10 +8,10 @@ internal class UnitOfWork : IUnitOfWork
 {
     private ZeroStoreAppDbContext? _context;
     private readonly Lazy<IProductRepository> _lazyProductRepository;
-    
+
     private IDbContextTransaction? _contextTransaction;
 
-    public UnitOfWork(ZeroStoreAppDbContext context, 
+    public UnitOfWork(ZeroStoreAppDbContext context,
         Lazy<IProductRepository> lazyProductRepository)
     {
         _context = context;
@@ -22,13 +22,13 @@ internal class UnitOfWork : IUnitOfWork
 
     public async Task BegingTransactionAsync(CancellationToken cancellationToken)
     {
-        if(_context is not null)
-         _contextTransaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+        if (_context is not null)
+            _contextTransaction = await _context.Database.BeginTransactionAsync(cancellationToken);
     }
 
     public async Task CommitAsync(CancellationToken cancellationToken)
     {
-        if(_contextTransaction is null) return;
+        if (_contextTransaction is null) return;
         await _contextTransaction.CommitAsync(cancellationToken);
     }
 
@@ -64,7 +64,7 @@ internal class UnitOfWork : IUnitOfWork
                 _context = null;
             }
         }
-    } 
+    }
     #endregion
 }
 
@@ -95,6 +95,6 @@ internal class UnitOfQuery : IUnitOfQuery
                 disposable.Dispose();
             }
         }
-    } 
+    }
     #endregion
 }
