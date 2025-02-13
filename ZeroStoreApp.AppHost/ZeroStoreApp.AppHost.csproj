@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZeroStoreApp.ApiService\ZeroStoreApp.ApiService.csproj" />
+    <ProjectReference Include="..\ZeroStoreApp.CommandService\ZeroStoreApp.CommandService.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.Web\ZeroStoreApp.Web.csproj" />
   </ItemGroup>
 

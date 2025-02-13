@@ -122,8 +122,28 @@ public static class Extensions
                 };
             };
         }); 
-        
+
         return builder;
+    }
+
+    public static WebApplication AddSwaggerDoc(this WebApplication app)
+    {
+        // Add OpenAPI 3.0 document serving middleware
+        // Available at: http://localhost:<port>/swagger/v1/swagger.json
+        app.UseOpenApi();
+
+        // Add web UIs to interact with the document
+        // Available at: http://localhost:<port>/swagger
+        app.UseSwaggerUi(); // UseSwaggerUI is called only in Development.
+
+        // Add ReDoc UI to interact with the document
+        // Available at: http://localhost:<port>/redoc
+        app.UseReDoc(options =>
+        {
+            options.Path = "/redoc";
+        });
+
+        return app;
     }
 
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
