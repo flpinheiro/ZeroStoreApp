@@ -2,7 +2,11 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder.AddRedis("cache");
 
-var apiService = builder.AddProject<Projects.ZeroStoreApp_ApiService>("apiservice");
+var commandService =  builder.AddProject<Projects.ZeroStoreApp_CommandService>("commandservice");
+
+var apiService = builder.AddProject<Projects.ZeroStoreApp_ApiService>("apiservice")
+    .WithReference(commandService)
+    .WaitFor(commandService);
 
 builder.AddProject<Projects.ZeroStoreApp_Web>("webfrontend")
     .WithExternalHttpEndpoints()

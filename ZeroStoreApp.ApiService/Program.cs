@@ -16,47 +16,42 @@ var app = builder.Build();
 app.UseExceptionHandler();
 
 if (app.Environment.IsDevelopment())
-{ 
+{
     app.MapOpenApi();
-    // Add OpenAPI 3.0 document serving middleware
-    // Available at: http://localhost:<port>/swagger/v1/swagger.json
-    app.UseOpenApi();
-
-    // Add web UIs to interact with the document
-    // Available at: http://localhost:<port>/swagger
-    app.UseSwaggerUi(); // UseSwaggerUI is called only in Development.
-
-    // Add ReDoc UI to interact with the document
-    // Available at: http://localhost:<port>/redoc
-    app.UseReDoc(options =>
-    {
-        options.Path = "/redoc";
-    });
+    app.AddSwaggerDoc();
 }
 
+app.UseHttpsRedirection();
 
-
-string[] summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast");
+WeatherForecastController(app);
 
 app.MapDefaultEndpoints();
 
 app.Run();
 
+#region Weather Forescast
+static void WeatherForecastController(WebApplication app)
+{
+string[] summaries = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
+
+app.MapGet("/weatherforecast", () =>
+{
+var forecast = Enumerable.Range(1, 5).Select(index =>
+    new WeatherForecast
+    (
+        DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+        Random.Shared.Next(-20, 55),
+        summaries[Random.Shared.Next(summaries.Length)]
+    ))
+    .ToArray();
+return forecast;
+})
+.WithName("GetWeatherForecast");
+}
+
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
 }
+
+#endregion
