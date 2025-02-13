@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.AppHost", "ZeroStoreApp.AppHost\ZeroStoreApp.AppHost.csproj", "{F37990FC-D9E7-47F1-B463-A12D8137DF48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.ServiceDefaults", "ZeroStoreApp.ServiceDefaults\ZeroStoreApp.ServiceDefaults.csproj", "{FFA92191-021C-4ADC-B9D8-B6FDB2520055}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.ApiService", "ZeroStoreApp.ApiService\ZeroStoreApp.ApiService.csproj", "{9E055E3E-2548-4AEF-9960-F32C3612D2A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.Web", "ZeroStoreApp.Web\ZeroStoreApp.Web.csproj", "{F1EAF9BD-B612-443B-8D35-C5E9F5EFED42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.Tests", "ZeroStoreApp.Tests\ZeroStoreApp.Tests.csproj", "{2005A23F-2648-401C-888A-30F9AE97A0AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F37990FC-D9E7-47F1-B463-A12D8137DF48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F37990FC-D9E7-47F1-B463-A12D8137DF48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F37990FC-D9E7-47F1-B463-A12D8137DF48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F37990FC-D9E7-47F1-B463-A12D8137DF48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFA92191-021C-4ADC-B9D8-B6FDB2520055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFA92191-021C-4ADC-B9D8-B6FDB2520055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFA92191-021C-4ADC-B9D8-B6FDB2520055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFA92191-021C-4ADC-B9D8-B6FDB2520055}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E055E3E-2548-4AEF-9960-F32C3612D2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E055E3E-2548-4AEF-9960-F32C3612D2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E055E3E-2548-4AEF-9960-F32C3612D2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E055E3E-2548-4AEF-9960-F32C3612D2A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1EAF9BD-B612-443B-8D35-C5E9F5EFED42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1EAF9BD-B612-443B-8D35-C5E9F5EFED42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1EAF9BD-B612-443B-8D35-C5E9F5EFED42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1EAF9BD-B612-443B-8D35-C5E9F5EFED42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2005A23F-2648-401C-888A-30F9AE97A0AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2005A23F-2648-401C-888A-30F9AE97A0AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2005A23F-2648-401C-888A-30F9AE97A0AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2005A23F-2648-401C-888A-30F9AE97A0AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
