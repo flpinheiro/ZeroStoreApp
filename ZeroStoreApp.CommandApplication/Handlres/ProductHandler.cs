@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using ZeroStoreApp.CommandApplication.Commands;
-using ZeroStoreApp.CommandApplication.Responses;
-using ZeroStoreApp.CrossCutting.Constants;
-using ZeroStoreApp.CrossCutting.Exceptions;
-using ZeroStoreApp.Domain.Commons;
-using ZeroStoreApp.Domain.Repositories;
 using ZeroStoreApp.Domain.Services;
 
 namespace ZeroStoreApp.CommandApplication.Handlres;
@@ -14,8 +9,8 @@ public class ProductHandler :
     IRequestHandler<CreateProductCommand, bool>,
     IRequestHandler<UpdateProductCommand, bool>,
     IRequestHandler<DeleteProductCommand, bool>
-    //IRequestHandler<GetProductCommand, ProductResponse>,
-    //IRequestHandler<GetProductsCommand, PaginatedResponse<PaginatedProductResponse>>
+//IRequestHandler<GetProductCommand, ProductResponse>,
+//IRequestHandler<GetProductsCommand, PaginatedResponse<PaginatedProductResponse>>
 {
     private readonly IUnitOfWork uow;
     private readonly IMapper _mapper;
@@ -64,7 +59,7 @@ public class ProductHandler :
 
     //public async Task<PaginatedResponse<PaginatedProductResponse>> Handle(GetProductsCommand request, CancellationToken cancellationToken)
     //{
-    //    var query = _mapper.Map<PaginatedQuery>(request);
+    //    var query = _mapper.Map<PaginatedRequest>(request);
     //    var products = await uow.Products.GetPaginatedAsync(query, cancellationToken);
     //    throw new NotImplementedException();
     //}

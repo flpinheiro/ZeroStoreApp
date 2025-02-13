@@ -2,7 +2,7 @@
 
 namespace ZeroStoreApp.Domain.Services;
 
-public interface IUnitOfWork: IDisposable
+public interface IUnitOfWork : IDisposable
 {
     Task CommitAsync(CancellationToken cancellationToken);
 

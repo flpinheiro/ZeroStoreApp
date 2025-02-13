@@ -14,7 +14,7 @@ public class GetProductValidator : AbstractValidator<GetProductCommand>
     }
 }
 
-public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand> 
+public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
 {
     public DeleteProductCommandValidator()
     {
@@ -24,7 +24,7 @@ public class DeleteProductCommandValidator : AbstractValidator<DeleteProductComm
     }
 }
 
-public class CreateProductCommandValidator: AbstractValidator<CreateProductCommand>
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
     public CreateProductCommandValidator()
     {

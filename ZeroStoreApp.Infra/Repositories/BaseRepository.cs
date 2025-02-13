@@ -1,11 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ZeroStoreApp.Domain.Commons;
-using ZeroStoreApp.Domain.Enities;
 using ZeroStoreApp.Domain.Repositories;
 using ZeroStoreApp.Infra.Extensions;
 
@@ -36,14 +30,14 @@ internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity 
         return entity;
     }
 
-    public virtual async Task<PaginatedResult<TEntity>> GetPaginatedAsync(PaginatedQuery request, CancellationToken cancellationToken)
+    public virtual async Task<PaginatedResult<TEntity>> GetPaginatedAsync(PaginatedRequest request, CancellationToken cancellationToken)
     {
         return await _context.Set<TEntity>().ToPaginatedAsync(request.Page, request.PageSize);
     }
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
     {
-      return  await _context.Set<TEntity>().ToListAsync(cancellationToken);
+        return await _context.Set<TEntity>().ToListAsync(cancellationToken);
     }
 
     public virtual async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken)

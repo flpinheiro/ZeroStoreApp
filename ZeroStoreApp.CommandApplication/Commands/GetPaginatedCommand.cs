@@ -1,6 +1,6 @@
 ﻿namespace ZeroStoreApp.CommandApplication.Commands;
 
-public abstract class  GetPaginatedCommand
+public abstract class GetPaginatedCommand
 {
     public string? Query { get; set; }
     public int Page { get; set; } = 1;

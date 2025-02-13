@@ -5,7 +5,7 @@ namespace ZeroStoreApp.Tests.TestData.Entities;
 
 internal class ProductTestData
 {
-    private Faker<Product> faker = 
+    private Faker<Product> faker =
         new Faker<Product>("pt-br")
         .StrictMode(true)
         .RuleFor(p => p.Id, f => f.Random.Uuid())

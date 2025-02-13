@@ -3,9 +3,9 @@ using ZeroStoreApp.Domain.Enities;
 
 namespace ZeroStoreApp.Infra;
 
-internal class ZeroStoreAppDbContext: DbContext
+internal class ZeroStoreAppDbContext : DbContext
 {
-    public ZeroStoreAppDbContext(DbContextOptions<ZeroStoreAppDbContext> options): base(options)
+    public ZeroStoreAppDbContext(DbContextOptions<ZeroStoreAppDbContext> options) : base(options)
     {
     }
 

@@ -100,7 +100,8 @@ public static class Extensions
 
     public static TBuilder AddStandardDocumentationHandler<TBuilder>(this TBuilder builder, string title = "Zero Store API") where TBuilder : IHostApplicationBuilder
     {
-        builder.Services.AddOpenApiDocument(options => {
+        builder.Services.AddOpenApiDocument(options =>
+        {
             options.PostProcess = document =>
             {
                 document.Info = new OpenApiInfo
@@ -121,7 +122,7 @@ public static class Extensions
                     }
                 };
             };
-        }); 
+        });
 
         return builder;
     }

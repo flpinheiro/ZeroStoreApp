@@ -1,6 +1,4 @@
 ﻿using ZeroStoreApp.Domain.Commons;
-using ZeroStoreApp.Domain.Enities;
-using ZeroStoreApp.Domain.Queries;
 
 namespace ZeroStoreApp.Domain.Repositories;
 
@@ -8,11 +6,11 @@ public interface IBaseRepository<TEntity> : IBaseQueryRepository<TEntity>, IBase
 {
 }
 
-public interface IBaseQueryRepository<TEntity>: IDisposable where TEntity : BaseEntity
+public interface IBaseQueryRepository<TEntity> : IDisposable where TEntity : BaseEntity
 {
     Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
     Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
-    Task<PaginatedResult<TEntity>> GetPaginatedAsync(PaginatedQuery request, CancellationToken cancellationToken);
+    Task<PaginatedResult<TEntity>> GetPaginatedAsync(PaginatedRequest request, CancellationToken cancellationToken);
 }
 
 public interface IBasecommandRepository<TEntity> : IDisposable where TEntity : BaseEntity

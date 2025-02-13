@@ -1,8 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ZeroStoreApp.Domain.Commons;
+﻿using ZeroStoreApp.Domain.Commons;
 using ZeroStoreApp.Domain.Enities;
-using ZeroStoreApp.Domain.Queries;
 using ZeroStoreApp.Domain.Repositories;
+using ZeroStoreApp.Domain.Requests;
 using ZeroStoreApp.Infra.Extensions;
 
 namespace ZeroStoreApp.Infra.Repositories;
@@ -40,7 +39,7 @@ internal class ProductRepository : BaseRepository<Product>, IProductRepository
         return await _context.Products.FindAsync(id, cancellationToken);
     }
 
-    public async Task<PaginatedResult<Product>> GetPaginatedAsync(PaginatedProductQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedResult<Product>> GetPaginatedAsync(PaginatedProductRequest request, CancellationToken cancellationToken)
     {
         var query = _context.Products.AsQueryable();
         if (!string.IsNullOrWhiteSpace(request.Query))

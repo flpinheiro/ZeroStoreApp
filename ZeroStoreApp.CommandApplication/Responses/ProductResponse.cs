@@ -8,7 +8,7 @@ public class ProductResponse
     public decimal Price { get; set; }
 }
 
-public class PaginatedProductResponse 
+public class PaginatedProductResponse
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;
