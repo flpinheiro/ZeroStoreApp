@@ -31,6 +31,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.Infra", "ZeroS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.CommandService", "ZeroStoreApp.CommandService\ZeroStoreApp.CommandService.csproj", "{5003B8D9-3801-41DD-952E-9C429C010CA5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.CommandApplication", "ZeroStoreApp.CommandApplication\ZeroStoreApp.CommandApplication.csproj", "{06750DBB-AB97-49DF-ACE2-998DEB567C10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.CrossCutting", "ZeroStoreApp.CrossCutting\ZeroStoreApp.CrossCutting.csproj", "{5FA6FB68-B467-465A-8A94-929A47BD062E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{510FFE99-0238-44FD-ABAF-33FE79EA3042}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +78,14 @@ Global
 		{5003B8D9-3801-41DD-952E-9C429C010CA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5003B8D9-3801-41DD-952E-9C429C010CA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5003B8D9-3801-41DD-952E-9C429C010CA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06750DBB-AB97-49DF-ACE2-998DEB567C10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06750DBB-AB97-49DF-ACE2-998DEB567C10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06750DBB-AB97-49DF-ACE2-998DEB567C10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06750DBB-AB97-49DF-ACE2-998DEB567C10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA6FB68-B467-465A-8A94-929A47BD062E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA6FB68-B467-465A-8A94-929A47BD062E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA6FB68-B467-465A-8A94-929A47BD062E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA6FB68-B467-465A-8A94-929A47BD062E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,5 +99,7 @@ Global
 		{F4F95B76-29A8-458D-87D9-0ECB8490ABBB} = {0E3E0299-F820-4EF8-861C-4FB7C87FA396}
 		{0DA62589-9B46-43DF-B709-6F0823CDBB57} = {EED30C1F-3EE9-4D3E-B950-5EDB18C95383}
 		{5003B8D9-3801-41DD-952E-9C429C010CA5} = {6285B35A-A1CF-4D9F-B8F2-3EE1C9E1EA12}
+		{06750DBB-AB97-49DF-ACE2-998DEB567C10} = {E80DC5B9-218A-4BEA-86A9-6829F32E721D}
+		{5FA6FB68-B467-465A-8A94-929A47BD062E} = {0E3E0299-F820-4EF8-861C-4FB7C87FA396}
 	EndGlobalSection
 EndGlobal
