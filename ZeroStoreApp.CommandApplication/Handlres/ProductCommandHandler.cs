@@ -26,10 +26,6 @@ public class ProductCommandHandler :
     /// <param name="request">Product information to be created</param>
     /// <param name="cancellationToken">cancelation token</param>
     /// <returns>ProductResponse</returns>
-    /// <remarks>
-    /// <list type="bullet"> true if the product was created successfully </list>
-    /// <list type="bullet"> false if the product was not created successfully </list>
-    /// </remarks>
     public async Task<ProductResponse?> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         var product = _mapper.Map<Product>(request);
@@ -38,11 +34,22 @@ public class ProductCommandHandler :
         return response;
     }
 
+    /// <summary>
+    /// Create a new product
+    /// </summary>
+    /// <param name="request">Product information to be created</param>
+    /// <param name="cancellationToken">cancelation token</param>
+    /// <returns><see cref="ProductResponse"/> </returns>
     public async Task<ProductResponse?> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
-        // var product = _mapper.Map<Product>(request);
-        
         var product = await uow.Products.GetByIdAsync(request.Id, cancellationToken);
+
+        if (product == null || request == null) return null;
+
+        product.Name = request.Name ?? string.Empty;
+        product.Description = request.Description ?? string.Empty;
+        product.Price = request.Price;
+        product.Stock = request.Stock;
 
         await uow.Products.UpdateAsync(product, cancellationToken);
         var response = _mapper.Map<ProductResponse>(product);

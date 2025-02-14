@@ -1,10 +1,7 @@
 ﻿using FluentValidation;
 using ZeroStoreApp.CommandApplication.Commands;
 
-
 namespace ZeroStoreApp.CommandApplication.Validators;
-
-
 
 public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
 {
@@ -36,11 +33,15 @@ public class CreateProductCommandValidator : AbstractValidator<CreateProductComm
             .NotEmpty()
             .WithMessage(ProductDefinition.PriceRequiredMessage)
             .PrecisionScale(ProductDefinition.PricePrecision, ProductDefinition.PriceScale, true)
-            .WithMessage(ProductDefinition.PricePrecisionScaleMessage);
+            .WithMessage(ProductDefinition.PricePrecisionScaleMessage)
+            .GreaterThan(0)
+            .WithMessage(ProductDefinition.PricePositive);
 
         RuleFor(x => x.Stock)
             .NotEmpty()
-            .WithMessage(ProductDefinition.StockRequiredMessage);
+            .WithMessage(ProductDefinition.StockRequiredMessage)
+            .GreaterThan(0)
+            .WithMessage(ProductDefinition.StockPositive);
     }
 }
 
@@ -68,11 +69,14 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
             .NotEmpty()
             .WithMessage(ProductDefinition.PriceRequiredMessage)
             .PrecisionScale(ProductDefinition.PricePrecision, ProductDefinition.PriceScale, true)
-            .WithMessage(ProductDefinition.PricePrecisionScaleMessage);
+            .WithMessage(ProductDefinition.PricePrecisionScaleMessage)
+            .GreaterThan(0)
+            .WithMessage(ProductDefinition.PricePositive);
 
         RuleFor(x => x.Stock)
             .NotEmpty()
-            .WithMessage(ProductDefinition.StockRequiredMessage);
+            .WithMessage(ProductDefinition.StockRequiredMessage)
+            .GreaterThan(0)
+            .WithMessage(ProductDefinition.StockPositive);
     }
 }
-

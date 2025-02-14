@@ -28,7 +28,9 @@ public static class Definitions
 
         public const string PriceRequiredMessage = "Price is required";
         public const string PricePrecisionScaleMessage = "Price must have {Precision} digits and {Scale} decimals";
+        public const string PricePositive = "Price must be positive";
 
         public const string StockRequiredMessage = "Stock is required";
+        public static string StockPositive = "Stock must be positive";
     }
 }

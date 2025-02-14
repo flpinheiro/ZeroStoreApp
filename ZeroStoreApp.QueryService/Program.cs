@@ -1,3 +1,7 @@
+using ZeroStoreApp.Infra.Extensions;
+using ZeroStoreApp.QueryApplication;
+using ZeroStoreApp.QueryApplication.Configurations;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
@@ -6,10 +10,19 @@ builder.AddServiceDefaults();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
 builder.AddStandardDocumentationHandler();
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+// Register AutoMapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(ApplicationLayer).Assembly);
+
+builder.Services.AddMediatR(cfg => 
+{
+    cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+    cfg.RegisterServicesFromAssembly(typeof(ApplicationLayer).Assembly);
+});
+
+builder.Services.AddQueryServices();
+builder.AddInfraConfiguration();
 
 var app = builder.Build();
 

@@ -1,6 +1,36 @@
-@ZeroStoreApp.CommandService_HostAddress = http://localhost:5019
+@ZeroStoreApp.CommandService_HostAddress = https://localhost:7100
 
 GET {{ZeroStoreApp.CommandService_HostAddress}}/weatherforecast/
 Accept: application/json
+
+###
+
+POST {{ZeroStoreApp.CommandService_HostAddress}}/api/product
+Content-Type: application/json
+
+{
+  "name": "Product de Test",
+  "description": "Product de test",
+  "price": 5,
+  "stock": 500
+}
+
+###
+
+PUT {{ZeroStoreApp.CommandService_HostAddress}}/api/product
+Content-Type: application/json
+
+{
+  "id": "a4cb4ba1-1234-4431-466a-08dd4cacd7c6",
+  "name": "Product de Test 2",
+  "description": "Product de test 2",
+  "price": 50,
+  "stock": 250
+}
+
+###
+
+@productId = a4cb4ba1-1234-4431-466a-08dd4cacd7c6
+DELETE {{ZeroStoreApp.CommandService_HostAddress}}/api/product/{{productId}}
 
 ###
