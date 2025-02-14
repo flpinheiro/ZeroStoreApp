@@ -7,14 +7,13 @@ using ZeroStoreApp.Domain.Services;
 using ZeroStoreApp.Infra.Repositories;
 using ZeroStoreApp.Infra.Services;
 
-
 namespace ZeroStoreApp.Infra.Extensions;
 
 public static class InfraConfiguration
 {
-    public static IServiceCollection AddInfraConfiguration(this WebApplicationBuilder builder) 
+    public static IServiceCollection AddInfraConfiguration(this WebApplicationBuilder builder)
     {
-        builder.AddSqlServerDbContext<ZeroStoreAppDbContext>(connectionName: "database");
+        builder.AddSqlServerDbContext<ZeroStoreAppDbContext>(connectionName: "sqldata");
 
         builder.Services.AddInfraConfiguration(builder.Configuration);
 
@@ -22,12 +21,6 @@ public static class InfraConfiguration
     }
     private static IServiceCollection AddInfraConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        //services.AddDbContext<ZeroStoreAppDbContext>(options =>
-        //{
-        //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-        //        action => action.MigrationsAssembly("ZeroStoreApp.Infra"));
-        //});
-
         // add unit of work service
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IUnitOfQuery, UnitOfQuery>();
@@ -37,16 +30,15 @@ public static class InfraConfiguration
         services.AddScoped<IQueryProductRepRepository, ProductRepository>();
 
         // add lazy services
-        services.AddScoped(provider => new Lazy<IProductRepository>(() => provider.GetRequiredService<IProductRepository>()));
-        services.AddScoped(provider => new Lazy<IQueryProductRepRepository>(() => provider.GetRequiredService<IQueryProductRepRepository>()));
-
-//#if DEBUG
-//        using var scope = services.BuildServiceProvider().CreateScope();
-//        var context = scope.ServiceProvider.GetRequiredService<ZeroStoreAppDbContext>();
-//        context.Database.Migrate();
-//#endif
+        services.AddScopedLazy<IProductRepository>();
+        services.AddScopedLazy<IQueryProductRepRepository>();
 
         return services;
+    }
+
+    private static void AddScopedLazy<TInterface>(this IServiceCollection services) where TInterface : class
+    {
+        services.AddScoped(provider => new Lazy<TInterface>(() => provider.GetRequiredService<TInterface>()));
     }
 }
 

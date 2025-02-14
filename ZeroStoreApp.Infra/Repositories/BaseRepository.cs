@@ -25,7 +25,9 @@ internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity 
     {
         var entity = await _context.Set<TEntity>().FindAsync(id, cancellationToken);
         if (entity is null) return null;
-        _context.Set<TEntity>().Remove(entity);
+        //_context.Set<TEntity>().Remove(entity);
+        entity.Delete();
+        _context.Set<TEntity>().Update(entity);
         await _context.SaveChangesAsync(cancellationToken);
         return entity;
     }
@@ -47,6 +49,7 @@ internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity 
 
     public virtual async Task<TEntity?> UpdateAsync(TEntity entity, CancellationToken cancellationToken)
     {
+        entity.Update();
         _context.Set<TEntity>().Update(entity);
         await _context.SaveChangesAsync(cancellationToken);
         return entity;

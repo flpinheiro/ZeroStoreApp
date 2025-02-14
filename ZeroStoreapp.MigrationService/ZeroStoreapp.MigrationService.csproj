@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-ZeroStoreapp.MigrationService-412fca75-33d0-4a0f-9ea0-efc1d1add7c0</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ZeroStoreApp.CrossCutting\ZeroStoreApp.CrossCutting.csproj" />
+    <ProjectReference Include="..\ZeroStoreApp.Infra\ZeroStoreApp.Infra.csproj" />
+    <ProjectReference Include="..\ZeroStoreApp.ServiceDefaults\ZeroStoreApp.ServiceDefaults.csproj" />
+  </ItemGroup>
+</Project>

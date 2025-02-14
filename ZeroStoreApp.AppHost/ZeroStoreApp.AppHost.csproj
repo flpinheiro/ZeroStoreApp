@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ZeroStoreApp.ApiService\ZeroStoreApp.ApiService.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.CommandService\ZeroStoreApp.CommandService.csproj" />
+    <ProjectReference Include="..\ZeroStoreapp.MigrationService\ZeroStoreapp.MigrationService.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.QueryService\ZeroStoreApp.QueryService.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.Web\ZeroStoreApp.Web.csproj" />
   </ItemGroup>
@@ -22,7 +23,6 @@
     <PackageReference Include="Aspire.Hosting.AppHost" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.Redis" Version="9.0.0" />
     <PackageReference Include="Aspire.Hosting.SqlServer" Version="9.0.0" />
-    <PackageReference Include="Aspire.Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
   </ItemGroup>
 
 </Project>
