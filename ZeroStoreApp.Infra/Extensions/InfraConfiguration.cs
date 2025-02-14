@@ -1,13 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using ZeroStoreApp.Domain.Repositories;
 using ZeroStoreApp.Domain.Services;
 using ZeroStoreApp.Infra.Repositories;
 using ZeroStoreApp.Infra.Services;
 
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
 
 namespace ZeroStoreApp.Infra.Extensions;
 

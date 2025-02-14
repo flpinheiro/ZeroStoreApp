@@ -4,9 +4,9 @@ using ZeroStoreApp.Domain.Commons;
 
 namespace ZeroStoreApp.Infra.Mappings;
 
-internal abstract class BaseEntityConfiguration : IEntityTypeConfiguration<BaseEntity>
+internal abstract class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : BaseEntity
 {
-    public void Configure(EntityTypeBuilder<BaseEntity> builder)
+    public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();

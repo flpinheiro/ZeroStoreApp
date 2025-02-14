@@ -3,7 +3,7 @@
 to apply the migration, run the following command:
 
 ```sh
-Add-Migration "InitialMigration" -Context ZeroStoreAppDbContext -Project ZeroStoreApp.Infra -OutputDir Data/Migrations
+Add-Migration -name "InitialMigration" -Context ZeroStoreAppDbContext -Project ZeroStoreApp.Infra -OutputDir Data/Migrations -StartupProject ZeroStoreApp.CommandService -verbose
 ```
 
 to update the database, run the following command:
