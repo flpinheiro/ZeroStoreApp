@@ -4,15 +4,7 @@ using ZeroStoreApp.CommandApplication.Commands;
 
 namespace ZeroStoreApp.CommandApplication.Validators;
 
-public class GetProductValidator : AbstractValidator<GetProductCommand>
-{
-    public GetProductValidator()
-    {
-        RuleFor(x => x.Id)
-            .NotEmpty()
-            .WithMessage(IdRequiredMessage);
-    }
-}
+
 
 public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
 {
@@ -84,10 +76,3 @@ public class UpdateProductCommandValidator : AbstractValidator<UpdateProductComm
     }
 }
 
-public class GetProductsCommandValidator : AbstractValidator<GetProductsCommand>
-{
-    public GetProductsCommandValidator()
-    {
-        Include(new GetPaginatedCommandValidator());
-    }
-}

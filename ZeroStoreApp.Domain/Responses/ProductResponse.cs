@@ -1,4 +1,4 @@
-﻿namespace ZeroStoreApp.CommandApplication.Responses;
+﻿namespace ZeroStoreApp.Domain.Responses;
 
 public class ProductResponse
 {

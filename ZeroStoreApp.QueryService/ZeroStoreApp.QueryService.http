@@ -1,0 +1,6 @@
+@ZeroStoreApp.QueryService_HostAddress = http://localhost:5271
+
+GET {{ZeroStoreApp.QueryService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

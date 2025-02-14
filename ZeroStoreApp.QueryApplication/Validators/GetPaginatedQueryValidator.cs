@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using ZeroStoreApp.CommandApplication.Commands;
+using ZeroStoreApp.QueryApplication.Queries;
 
-namespace ZeroStoreApp.CommandApplication.Validators;
+namespace ZeroStoreApp.QueryApplication.Validators;
 
-public class GetPaginatedCommandValidator : AbstractValidator<GetPaginatedCommand>
+public class GetPaginatedQueryValidator : AbstractValidator<GetPaginatedQuery>
 {
-    public GetPaginatedCommandValidator()
+    public GetPaginatedQueryValidator()
     {
         RuleFor(x => x.Page)
             .GreaterThanOrEqualTo(PaginationDefinition.DefaultPage)
