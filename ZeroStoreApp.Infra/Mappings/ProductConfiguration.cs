@@ -5,10 +5,12 @@ using static ZeroStoreApp.CrossCutting.Constants.Definitions;
 
 namespace ZeroStoreApp.Infra.Mappings;
 
-internal class ProductConfiguration : BaseEntityConfiguration, IEntityTypeConfiguration<Product>
+internal class ProductConfiguration : BaseEntityConfiguration<Product>, IEntityTypeConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<Product> builder)
+    public override void Configure(EntityTypeBuilder<Product> builder)
     {
+        base.Configure(builder);
+
         builder.Property(x => x.Name)
             .IsRequired()
             .HasMaxLength(ProductDefinition.NameMaxLength);
