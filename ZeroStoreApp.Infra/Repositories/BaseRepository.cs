@@ -67,6 +67,5 @@ internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity 
             _disposed = true;
         }
     }
-
     #endregion
 }
