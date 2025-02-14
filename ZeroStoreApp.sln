@@ -35,6 +35,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.CommandApplica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.CrossCutting", "ZeroStoreApp.CrossCutting\ZeroStoreApp.CrossCutting.csproj", "{5FA6FB68-B467-465A-8A94-929A47BD062E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.QueryApplication", "ZeroStoreApp.QueryApplication\ZeroStoreApp.QueryApplication.csproj", "{034207C4-98EB-4544-9307-9C24EF44B0FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZeroStoreApp.QueryService", "ZeroStoreApp.QueryService\ZeroStoreApp.QueryService.csproj", "{14A978D6-83E6-4CCE-B8D9-1CC1E512BE16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{5FA6FB68-B467-465A-8A94-929A47BD062E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FA6FB68-B467-465A-8A94-929A47BD062E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FA6FB68-B467-465A-8A94-929A47BD062E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{034207C4-98EB-4544-9307-9C24EF44B0FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{034207C4-98EB-4544-9307-9C24EF44B0FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{034207C4-98EB-4544-9307-9C24EF44B0FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{034207C4-98EB-4544-9307-9C24EF44B0FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14A978D6-83E6-4CCE-B8D9-1CC1E512BE16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14A978D6-83E6-4CCE-B8D9-1CC1E512BE16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14A978D6-83E6-4CCE-B8D9-1CC1E512BE16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14A978D6-83E6-4CCE-B8D9-1CC1E512BE16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,5 +108,7 @@ Global
 		{5003B8D9-3801-41DD-952E-9C429C010CA5} = {6285B35A-A1CF-4D9F-B8F2-3EE1C9E1EA12}
 		{06750DBB-AB97-49DF-ACE2-998DEB567C10} = {E80DC5B9-218A-4BEA-86A9-6829F32E721D}
 		{5FA6FB68-B467-465A-8A94-929A47BD062E} = {0E3E0299-F820-4EF8-861C-4FB7C87FA396}
+		{034207C4-98EB-4544-9307-9C24EF44B0FB} = {E80DC5B9-218A-4BEA-86A9-6829F32E721D}
+		{14A978D6-83E6-4CCE-B8D9-1CC1E512BE16} = {6285B35A-A1CF-4D9F-B8F2-3EE1C9E1EA12}
 	EndGlobalSection
 EndGlobal

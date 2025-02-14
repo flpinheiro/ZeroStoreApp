@@ -1,4 +1,5 @@
-﻿using ZeroStoreApp.Domain.Commons;
+﻿using Microsoft.EntityFrameworkCore;
+using ZeroStoreApp.Domain.Commons;
 using ZeroStoreApp.Domain.Enities;
 using ZeroStoreApp.Domain.Repositories;
 using ZeroStoreApp.Domain.Requests;
