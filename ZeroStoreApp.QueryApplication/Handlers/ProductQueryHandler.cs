@@ -14,7 +14,7 @@ namespace ZeroStoreApp.QueryApplication.Handlers;
 
 public class ProductQueryHandler : 
     IRequestHandler<GetProductQuery, ProductResponse>,
-    IRequestHandler<GetProductsQuery, PaginatedResponse<PaginatedProductResponse>>
+    IRequestHandler<GetPaginatedProductsQuery, PaginatedResponse<PaginatedProductResponse>>
 {
     private readonly IUnitOfQuery _uow;
     private readonly IMapper _mapper;
@@ -32,7 +32,7 @@ public class ProductQueryHandler :
         return response;
     }
 
-    public async Task<PaginatedResponse<PaginatedProductResponse>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedResponse<PaginatedProductResponse>> Handle(GetPaginatedProductsQuery request, CancellationToken cancellationToken)
     {
         var dto = _mapper.Map<PaginatedProductRequest>(request);
         var products =  await _uow.Products.GetPaginatedAsync(dto, cancellationToken);

@@ -1,9 +1,7 @@
 @ZeroStoreApp.CommandService_HostAddress = https://localhost:7100
 
-GET {{ZeroStoreApp.CommandService_HostAddress}}/weatherforecast/
-Accept: application/json
 
-###
+### Create a new product
 
 POST {{ZeroStoreApp.CommandService_HostAddress}}/api/product
 Content-Type: application/json
@@ -15,7 +13,7 @@ Content-Type: application/json
   "stock": 500
 }
 
-###
+### update a product
 
 PUT {{ZeroStoreApp.CommandService_HostAddress}}/api/product
 Content-Type: application/json
@@ -28,7 +26,7 @@ Content-Type: application/json
   "stock": 250
 }
 
-###
+### delete a product (logical delete)
 
 @productId = a4cb4ba1-1234-4431-466a-08dd4cacd7c6
 DELETE {{ZeroStoreApp.CommandService_HostAddress}}/api/product/{{productId}}

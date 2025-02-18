@@ -57,7 +57,7 @@ public class ProductController : ControllerBase
         var response = await _mediator.Send(command, cancellationToken);
         if (response == null)
         {
-            return NotFound(new ApiResponse(ResponseMessages.Products.ProductNotFound, string.Empty));
+            return NotFound(new ApiResponse(ResponseMessages.Products.ProductNotFound, command.Id));
         }
         return Ok(new ApiResponse<ProductResponse>(response, ResponseMessages.Products.ProductUpdated, response.Id));
     }
@@ -79,7 +79,7 @@ public class ProductController : ControllerBase
         var response = await _mediator.Send(command, cancellationToken);
         if (response == null)
         {
-            return NotFound(new ApiResponse(ResponseMessages.Products.ProductNotFound, string.Empty));
+            return NotFound(new ApiResponse(ResponseMessages.Products.ProductNotFound, command.Id));
         }
         return Ok(new ApiResponse<ProductResponse>(response, ResponseMessages.Products.ProductDeleted, response.Id));
     }

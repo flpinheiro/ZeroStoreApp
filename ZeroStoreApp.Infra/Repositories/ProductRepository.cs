@@ -23,7 +23,7 @@ internal class ProductRepository : BaseRepository<Product>, IProductRepository
 
     public override async Task<Product?> DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var product = await _context.Products.FindAsync(id, cancellationToken);
+        var product = await GetByIdAsync(id, cancellationToken);
         if (product is null) return null;
         product.Delete();
         await _context.SaveChangesAsync(cancellationToken);
@@ -37,12 +37,12 @@ internal class ProductRepository : BaseRepository<Product>, IProductRepository
 
     public override async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _context.Products.FindAsync(id, cancellationToken);
+        return await _context.Products.Where(p => !p.IsDeleted).FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
     }
 
     public async Task<PaginatedResult<Product>> GetPaginatedAsync(PaginatedProductRequest request, CancellationToken cancellationToken)
     {
-        var query = _context.Products.AsQueryable();
+        var query = _context.Products.AsNoTracking().Where(p => !p.IsDeleted).AsQueryable();
         if (!string.IsNullOrWhiteSpace(request.Query))
         {
             query = query.Where(p => p.Name.Contains(request.Query));

@@ -8,6 +8,6 @@ public class GetProductQuery : IRequest<ProductResponse>
     public Guid Id { get; set; }
 }
 
-public class GetProductsQuery : GetPaginatedQuery, IRequest<PaginatedResponse<PaginatedProductResponse>>
+public class GetPaginatedProductsQuery : GetPaginatedQuery, IRequest<PaginatedResponse<PaginatedProductResponse>>
 {
 }

@@ -15,9 +15,9 @@ public class GetProductQueryValidator : AbstractValidator<GetProductQuery>
     }
 }
 
-public class GetProductsCommandValidator : AbstractValidator<GetProductsQuery>
+public class GetPaginatedProductsQueryValidator : AbstractValidator<GetPaginatedProductsQuery>
 {
-    public GetProductsCommandValidator()
+    public GetPaginatedProductsQueryValidator()
     {
         Include(new GetPaginatedQueryValidator());
     }
