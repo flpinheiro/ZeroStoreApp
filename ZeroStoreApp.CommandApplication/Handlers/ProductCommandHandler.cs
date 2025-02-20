@@ -105,7 +105,9 @@ public class ProductCommandHandler :
         cancellationToken.ThrowIfCancellationRequested();
         
         var product = await _unitOfWork.Products.DeleteAsync(request.Id, cancellationToken);
-        
+
+        if (product == null || request == null) return null;
+
         var response = _mapper.Map<ProductResponse>(product);
 
         var @event = _mapper.Map<DeleteProductEvent>(response);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ZeroStoreApp.CrossCutting.Common;
 using ZeroStoreApp.Domain.Commons;
 using ZeroStoreApp.Domain.Repositories;
 using ZeroStoreApp.Infra.Extensions;
@@ -23,18 +24,21 @@ internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity 
 
     public virtual async Task<TEntity?> DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
-        var entity = await _context.Set<TEntity>().FindAsync(id, cancellationToken);
+        var entity = await GetByIdAsync(id, cancellationToken);
         if (entity is null) return null;
-        //_context.Set<TEntity>().Remove(entity);
+
         entity.Delete();
         _context.Set<TEntity>().Update(entity);
         await _context.SaveChangesAsync(cancellationToken);
         return entity;
     }
 
-    public virtual async Task<PaginatedResult<TEntity>> GetPaginatedAsync(PaginatedRequest request, CancellationToken cancellationToken)
+    public virtual async Task<PaginatedList<TEntity>> GetPaginatedAsync(PaginatedRequest request, CancellationToken cancellationToken)
     {
-        return await _context.Set<TEntity>().ToPaginatedAsync(request.Page, request.PageSize);
+        return await _context
+            .Set<TEntity>()
+            .Where(e => !e.IsDeleted)
+            .ToPaginatedListAsync(request.Page, request.PageSize);
     }
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
@@ -44,7 +48,10 @@ internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity 
 
     public virtual async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
     {
-        return await _context.Set<TEntity>().FindAsync(id, cancellationToken);
+        return await _context
+            .Set<TEntity>()
+            .Where(e => !e.IsDeleted)
+            .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
 
     public virtual async Task<TEntity?> UpdateAsync(TEntity entity, CancellationToken cancellationToken)

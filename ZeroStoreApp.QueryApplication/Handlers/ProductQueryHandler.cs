@@ -5,16 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ZeroStoreApp.CrossCutting.Common;
+using ZeroStoreApp.CrossCutting.Helpers;
+using ZeroStoreApp.Domain.Enities;
 using ZeroStoreApp.Domain.Requests;
 using ZeroStoreApp.Domain.Responses;
 using ZeroStoreApp.Domain.Services;
+using ZeroStoreApp.QueryApplication.Profiles;
 using ZeroStoreApp.QueryApplication.Queries;
 
 namespace ZeroStoreApp.QueryApplication.Handlers;
 
-public class ProductQueryHandler : 
+public class ProductQueryHandler :
     IRequestHandler<GetProductQuery, ProductResponse>,
-    IRequestHandler<GetPaginatedProductsQuery, PaginatedResponse<PaginatedProductResponse>>
+    IRequestHandler<GetPaginatedProductsQuery, PaginatedList<PaginatedProductResponse>>
 {
     private readonly IUnitOfQuery _uow;
     private readonly IMapper _mapper;
@@ -32,12 +36,12 @@ public class ProductQueryHandler :
         return response;
     }
 
-    public async Task<PaginatedResponse<PaginatedProductResponse>> Handle(GetPaginatedProductsQuery request, CancellationToken cancellationToken)
+    public async Task<PaginatedList<PaginatedProductResponse>> Handle(GetPaginatedProductsQuery request, CancellationToken cancellationToken)
     {
         var dto = _mapper.Map<PaginatedProductRequest>(request);
-        var products =  await _uow.Products.GetPaginatedAsync(dto, cancellationToken);
+        var result = await _uow.Products.GetPaginatedAsync(dto, cancellationToken);
 
-        var respsonse = _mapper.Map<PaginatedResponse<PaginatedProductResponse>>(products);
+        var respsonse = _mapper.MapPaginatedList<Product, PaginatedProductResponse>(result);
 
         return respsonse;
     }
