@@ -28,7 +28,7 @@ Content-Type: application/json
 
 ### delete a product (logical delete)
 
-@productId = a4cb4ba1-1234-4431-466a-08dd4cacd7c6
+@productId = 68834726-c0fc-4b17-e5ff-08dd51ca487f
 DELETE {{ZeroStoreApp.CommandService_HostAddress}}/api/product/{{productId}}
 
 ###

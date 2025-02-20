@@ -1,6 +1,14 @@
-@ZeroStoreApp.QueryService_HostAddress = http://localhost:5271
+@ZeroStoreApp.QueryService_HostAddress = https://localhost:7200
 
-GET {{ZeroStoreApp.QueryService_HostAddress}}/weatherforecast/
-Accept: application/json
+
+### Get Paginated Product List
+
+GET {{ZeroStoreApp.QueryService_HostAddress}}/api/product
+
+### get product by id
+
+@productId = 68834726-c0fc-4b17-e5ff-08dd51ca487f
+
+GET {{ZeroStoreApp.QueryService_HostAddress}}/api/product/{{productId}}
 
 ###

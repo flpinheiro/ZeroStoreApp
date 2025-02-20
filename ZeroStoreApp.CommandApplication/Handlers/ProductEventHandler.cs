@@ -35,9 +35,7 @@ public class ProductEventHandler : INotificationHandler<CreateProductEvent>,
     {
         if (disposing)
         {
-            //_connection.Close();
             _channel.Dispose();
-            
         }
     } 
     #endregion
