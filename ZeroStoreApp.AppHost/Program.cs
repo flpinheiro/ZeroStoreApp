@@ -2,7 +2,11 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder.AddRedis("cache");
 
+//var username = builder.AddParameter("username", "admin", secret: true);
+
 var password = builder.AddParameter("password", "Chageme@123", secret: true);
+
+var rabbitmq = builder.AddRabbitMQ("messaging");
 
 var sql = builder.AddSqlServer("sql", password: password, port: 14330)
     .WithDataVolume()
@@ -15,6 +19,8 @@ var migration = builder.AddProject<Projects.ZeroStoreapp_MigrationService>("migr
 
 var commandService = builder.AddProject<Projects.ZeroStoreApp_CommandService>("commandservice")
     .WaitFor(migration)
+    .WithReference(rabbitmq)
+    .WaitFor(rabbitmq)
     .WithReference(sql)
     .WaitFor(sql);
 
@@ -35,5 +41,9 @@ builder.AddProject<Projects.ZeroStoreApp_Web>("webfrontend")
     .WaitFor(cache)
     .WithReference(apiService)
     .WaitFor(apiService);
+
+builder.AddProject<Projects.ZeroStoreApp_ConsumerService>("zerostoreapp-consumerservice")
+    .WithReference(rabbitmq)
+    .WaitFor(rabbitmq);
 
 builder.Build().Run();

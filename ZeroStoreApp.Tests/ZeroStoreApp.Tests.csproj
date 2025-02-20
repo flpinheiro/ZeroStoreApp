@@ -20,7 +20,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ZeroStoreApp.AppHost\ZeroStoreApp.AppHost.csproj" />
+    <ProjectReference Include="..\ZeroStoreApp.CommandApplication\ZeroStoreApp.CommandApplication.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.Domain\ZeroStoreApp.Domain.csproj" />
+    <ProjectReference Include="..\ZeroStoreApp.QueryApplication\ZeroStoreApp.QueryApplication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

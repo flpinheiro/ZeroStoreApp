@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RabbitMQ.Client;
+using System.Text;
 using ZeroStoreApp.CommandApplication.Commands;
 using ZeroStoreApp.CommandApplication.Validators;
 using ZeroStoreApp.CommandService.Responses;
@@ -17,7 +19,7 @@ public class ProductController : ControllerBase
 
     public ProductController(IMediator mediator)
     {
-        this._mediator = mediator;
+        _mediator = mediator;
     }
 
     [HttpPost]
@@ -39,6 +41,7 @@ public class ProductController : ControllerBase
         {
             return NotFound(new ApiResponse(ResponseMessages.Products.ProductNotFound, string.Empty));
         }
+
         return Ok(new ApiResponse<ProductResponse>(response, ResponseMessages.Products.ProductCreated, response.Id));
     }
 

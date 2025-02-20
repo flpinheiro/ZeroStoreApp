@@ -19,12 +19,12 @@ PUT {{ZeroStoreApp.CommandService_HostAddress}}/api/product
 Content-Type: application/json
 
 {
-  "id": "a4cb4ba1-1234-4431-466a-08dd4cacd7c6",
-  "name": "Product de Test 2",
-  "description": "Product de test 2",
-  "price": 50,
-  "stock": 250
-}
+    "id": "68834726-c0fc-4b17-e5ff-08dd51ca487f",
+    "name": "Product de Test update",
+    "description": "Product de test update",
+    "price": 250,
+    "stock": 250
+  }
 
 ### delete a product (logical delete)
 

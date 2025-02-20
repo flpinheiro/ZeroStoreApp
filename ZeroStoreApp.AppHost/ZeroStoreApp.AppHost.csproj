@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Sdk Name="Aspire.AppHost.Sdk" Version="9.0.0" />
 
@@ -12,8 +12,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.RabbitMQ" Version="9.0.0" />
     <ProjectReference Include="..\ZeroStoreApp.ApiService\ZeroStoreApp.ApiService.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.CommandService\ZeroStoreApp.CommandService.csproj" />
+    <ProjectReference Include="..\ZeroStoreApp.ConsumerService\ZeroStoreApp.ConsumerService.csproj" />
     <ProjectReference Include="..\ZeroStoreapp.MigrationService\ZeroStoreapp.MigrationService.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.QueryService\ZeroStoreApp.QueryService.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.Web\ZeroStoreApp.Web.csproj" />
