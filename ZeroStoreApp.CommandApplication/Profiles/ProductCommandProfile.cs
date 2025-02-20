@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZeroStoreApp.CommandApplication.Commands;
+using ZeroStoreApp.CommandApplication.Events;
 using ZeroStoreApp.Domain.Enities;
 using ZeroStoreApp.Domain.Responses;
 
@@ -14,10 +15,11 @@ public class ProductCommandProfile : Profile
 {
     public ProductCommandProfile()
     {
-        //CreateProductCommand -> Product
         CreateMap<CreateProductCommand, Product>();
         CreateMap<UpdateProductCommand, Product>();
-        //Product -> ProductResponse
         CreateMap<Product, ProductResponse>();
+        CreateMap<ProductResponse, CreateProductEvent>();
+        CreateMap<ProductResponse, UpdateProductEvent>();
+        CreateMap<ProductResponse, DeleteProductEvent>();
     }
 }

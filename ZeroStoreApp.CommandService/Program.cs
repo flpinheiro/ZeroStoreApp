@@ -24,6 +24,8 @@ builder.Services.AddMediatR(cfg =>
 builder.Services.AddCommandServices();
 builder.AddInfraConfiguration();
 
+builder.AddRabbitMQClient("messaging");
+
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
