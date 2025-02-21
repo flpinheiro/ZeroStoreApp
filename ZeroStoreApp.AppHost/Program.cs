@@ -2,8 +2,6 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var cache = builder.AddRedis("cache");
 
-//var username = builder.AddParameter("username", "admin", secret: true);
-
 var password = builder.AddParameter("password", "Chageme@123", secret: true);
 
 var rabbitmq = builder.AddRabbitMQ("messaging");
@@ -30,6 +28,8 @@ var queryService = builder.AddProject<Projects.ZeroStoreApp_QueryService>("query
     .WaitFor(sql);
 
 var apiService = builder.AddProject<Projects.ZeroStoreApp_ApiService>("apiservice")
+    .WithReference(cache)
+    .WaitFor(cache)
     .WithReference(queryService)
     .WaitFor(queryService)
     .WithReference(commandService)
