@@ -1,13 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RabbitMQ.Client;
-using System.Text;
 using ZeroStoreApp.CommandApplication.Commands;
 using ZeroStoreApp.CommandApplication.Validators;
-
-using ZeroStoreApp.CrossCutting.Constants;
 using ZeroStoreApp.CrossCutting.Common;
+using ZeroStoreApp.CrossCutting.Constants;
 using ZeroStoreApp.Domain.Responses;
 
 namespace ZeroStoreApp.CommandService.Controllers;
@@ -51,12 +47,12 @@ public class ProductController : BaseController
         }
         var response = await _mediator.Send(command, cancellationToken);
 
-        if(response == null)
+        if (response == null)
         {
             return NotFound();
         }
-        
-        
+
+
         return Ok(response, ResponseMessages.Products.ProductCreated, response.Id);
     }
 

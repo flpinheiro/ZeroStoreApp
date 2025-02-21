@@ -1,6 +1,4 @@
-﻿using ZeroStoreApp.Domain.Commons;
-
-namespace ZeroStoreApp.Domain.Enities;
+﻿namespace ZeroStoreApp.Domain.Enities;
 
 public class Product : BaseEntity
 {

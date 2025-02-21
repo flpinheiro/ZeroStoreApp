@@ -1,4 +1,4 @@
-﻿namespace ZeroStoreApp.Domain.Commons;
+﻿namespace ZeroStoreApp.Domain.Enities;
 
 public abstract class BaseEntity
 {

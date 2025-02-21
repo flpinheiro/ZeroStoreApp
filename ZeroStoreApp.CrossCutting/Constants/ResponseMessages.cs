@@ -2,7 +2,7 @@
 
 public static class ResponseMessages
 {
-    public static class Products 
+    public static class Products
     {
         public const string ProductNotFound = "Product {0} not found";
         public const string ProductCreated = "Product {0} created";
@@ -12,10 +12,10 @@ public static class ResponseMessages
         public const string ProductNotCreated = "Product {0} not created";
         public const string ProductNotUpdated = "Product {0} not updated";
         public const string ProductNotDeleted = "Product {0} not deleted";
-        public const string PaginatedProductsRetrieved = "Total of Products {0} Retrieved with Sucessufull";
+        public const string PaginatedProductsRetrieved = "Total Products {0} Retrieved with Sucessufull";
         public const string ProductRetrieved = "Product retrieved {0} with Sucessufull";
     }
-    
+
 
     public const string ValidationFailed = "Validation failed";
 

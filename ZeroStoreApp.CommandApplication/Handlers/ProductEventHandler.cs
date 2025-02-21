@@ -1,16 +1,11 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ZeroStoreApp.CommandApplication.Events;
 
 namespace ZeroStoreApp.CommandApplication.Handlers;
 
-public class ProductEventHandler : INotificationHandler<CreateProductEvent>, 
+public class ProductEventHandler : INotificationHandler<CreateProductEvent>,
     INotificationHandler<UpdateProductEvent>,
     INotificationHandler<DeleteProductEvent>,
     IDisposable
@@ -37,12 +32,12 @@ public class ProductEventHandler : INotificationHandler<CreateProductEvent>,
         {
             _channel.Dispose();
         }
-    } 
+    }
     #endregion
 
     public async Task Handle(CreateProductEvent notification, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Create Product Event: {Id}",  notification.Id);
+        _logger.LogInformation("Create Product Event: {Id}", notification.Id);
 
         cancellationToken.ThrowIfCancellationRequested();
 
