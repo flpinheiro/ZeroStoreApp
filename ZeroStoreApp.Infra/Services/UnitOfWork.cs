@@ -4,7 +4,7 @@ using ZeroStoreApp.Domain.Services;
 
 namespace ZeroStoreApp.Infra.Services;
 
-internal class UnitOfWork : IUnitOfWork
+public class UnitOfWork : IUnitOfWork
 {
     private ZeroStoreAppDbContext? _context;
     private readonly Lazy<IProductRepository> _lazyProductRepository;
@@ -68,7 +68,7 @@ internal class UnitOfWork : IUnitOfWork
     #endregion
 }
 
-internal class UnitOfQuery : IUnitOfQuery
+public class UnitOfQuery : IUnitOfQuery
 {
     private readonly Lazy<IQueryProductRepRepository> _lazyProductRepository;
 

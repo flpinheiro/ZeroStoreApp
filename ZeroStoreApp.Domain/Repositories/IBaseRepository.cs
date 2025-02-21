@@ -1,5 +1,4 @@
-﻿using ZeroStoreApp.CrossCutting.Common;
-using ZeroStoreApp.Domain.Commons;
+﻿using ZeroStoreApp.Domain.Enities;
 
 namespace ZeroStoreApp.Domain.Repositories;
 
@@ -11,7 +10,6 @@ public interface IBaseQueryRepository<TEntity> : IDisposable where TEntity : Bas
 {
     Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
     Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken);
-    Task<PaginatedList<TEntity>> GetPaginatedAsync(PaginatedRequest request, CancellationToken cancellationToken);
 }
 
 public interface IBasecommandRepository<TEntity> : IDisposable where TEntity : BaseEntity

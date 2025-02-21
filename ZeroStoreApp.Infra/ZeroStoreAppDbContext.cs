@@ -5,6 +5,10 @@ namespace ZeroStoreApp.Infra;
 
 public class ZeroStoreAppDbContext : DbContext
 {
+    public ZeroStoreAppDbContext() : base()
+    {
+    }
+
     public ZeroStoreAppDbContext(DbContextOptions<ZeroStoreAppDbContext> options) : base(options)
     {
     }

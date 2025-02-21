@@ -1,9 +1,8 @@
 ﻿using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace ZeroStoreApp.Domain.Responses;
 
-public class ProductResponse 
+public class ProductResponse
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;

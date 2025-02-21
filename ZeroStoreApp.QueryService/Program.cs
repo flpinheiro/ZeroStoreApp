@@ -15,7 +15,7 @@ builder.AddStandardDocumentationHandler();
 // Register AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(ApplicationLayer).Assembly);
 
-builder.Services.AddMediatR(cfg => 
+builder.Services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
     cfg.RegisterServicesFromAssembly(typeof(ApplicationLayer).Assembly);

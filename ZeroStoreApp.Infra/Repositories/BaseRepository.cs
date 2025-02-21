@@ -1,12 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ZeroStoreApp.CrossCutting.Common;
-using ZeroStoreApp.Domain.Commons;
+using ZeroStoreApp.Domain.Enities;
 using ZeroStoreApp.Domain.Repositories;
-using ZeroStoreApp.Infra.Extensions;
 
 namespace ZeroStoreApp.Infra.Repositories;
 
-internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
+public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
 {
     protected readonly ZeroStoreAppDbContext _context;
     protected bool _disposed = false;
@@ -31,14 +29,6 @@ internal class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity 
         _context.Set<TEntity>().Update(entity);
         await _context.SaveChangesAsync(cancellationToken);
         return entity;
-    }
-
-    public virtual async Task<PaginatedList<TEntity>> GetPaginatedAsync(PaginatedRequest request, CancellationToken cancellationToken)
-    {
-        return await _context
-            .Set<TEntity>()
-            .Where(e => !e.IsDeleted)
-            .ToPaginatedListAsync(request.Page, request.PageSize);
     }
 
     public virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
