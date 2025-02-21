@@ -1,0 +1,80 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7000"
+  },
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7200
+        },
+        {
+          "Host": "localhost",
+          "Port": 7201
+        }
+      ],
+      "UpstreamPathTemplate": "/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "SwaggerKey": "query",
+      "FileCacheOptions": {
+        "TtlSeconds": 15,
+        "Header": "OC-Caching-Control",
+        "EnableContentHashing": false
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7100
+        },
+        {
+          "Host": "localhost",
+          "Port": 7101
+        }
+      ],
+      "UpstreamPathTemplate": "/admin/{everything}",
+      "UpstreamHttpMethod": [
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "SwaggerKey": "command",
+      "FileCacheOptions": {
+        "TtlSeconds": 15,
+        "Header": "OC-Caching-Control",
+        "EnableContentHashing": true
+      }
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "query",
+      "Config": [
+        {
+          "Name": "Query API",
+          "Version": "v1",
+          "Url": "https://localhost:7200/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "command",
+      "Config": [
+        {
+          "Name": "Command API",
+          "Version": "v1",
+          "Url": "https://localhost:7100/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
