@@ -1,0 +1,90 @@
+﻿@page "/Product"
+@using FluentValidation.Results
+@using ZeroStoreApp.Web.Services
+@inject IApiService _service;
+
+<PageTitle>Prodduct</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Product</MudText>
+<MudText Class="mb-8">This component demonstrates fetching data from the server.</MudText>
+
+@* @if (products == null && errors == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+}
+else if(errors != null)
+{
+    <p>erro message</p>
+}
+else
+{ *@
+<MudTable Items="@products" Hover="true" SortLabel="Sort By" Elevation="0" AllowUnsorted="false" @bind-SelectedItem="product">
+
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Products</MudText>
+        <MudSpacer />
+        <MudTextField T="string" ValueChanged="@(s=>OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+        AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+    </ToolBarContent>
+
+    <HeaderContent>
+        <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<ProductListModel, object>(x=>x.Name)">Name</MudTableSortLabel></MudTh>
+        <MudTh><MudTableSortLabel SortBy="new Func<ProductListModel, object>(x=>x.Price)">Price</MudTableSortLabel></MudTh>
+    </HeaderContent>
+
+    <RowTemplate>
+        <MudTd DataLabel="Name">@context?.Name</MudTd>
+        <MudTd DataLabel="Price">@context?.Price</MudTd>
+    </RowTemplate>
+
+    <PagerContent>
+        <MudTablePager PageSizeOptions="new int[]{10, 25, 50, 100}" />
+        <MudPagination BoundaryCount="2" MiddleCount="5" Count="@_totalPages" @bind-Selected="@_curentPage" Class="mt-4" />
+    </PagerContent>
+
+</MudTable>
+@* } *@
+
+<p>@product?.Id</p>
+
+@code {
+    private int _curentPage = 1;
+    private int _totalPages = 0;
+
+    private ProductListModel? product = null;
+    private IEnumerable<ProductListModel>? products;
+    private ProductRequest request = new ProductRequest();
+    private IEnumerable<ValidationFailure>? errors;
+
+    private MudTable<ProductListModel> table = new();
+
+    // //ServerData="ServerReload"
+    // private async Task<TableData<ProductListModel>> ServerReload(TableState state, CancellationToken token)
+    // {
+
+    //     var response = await _service.GetProducts(request);
+
+    //     return new TableData<ProductListModel>() { TotalItems = response?.Data?.Count??0, Items = response?.Data };
+    // }
+
+    private void OnSearch(string query)
+    {
+        request.Query = query;
+        table.ReloadServerData();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await _service.GetProducts(request);
+        if (response.Success)
+        {
+            products = response.Data;
+            _curentPage = response.CurrentPage;
+            _totalPages = response.TotalPages;
+        }
+        else
+        {
+            errors = response.Errors;
+        }
+    }
+}
