@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -7,11 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ZeroStoreApp.CrossCutting\ZeroStoreApp.CrossCutting.csproj" />
     <ProjectReference Include="..\ZeroStoreApp.ServiceDefaults\ZeroStoreApp.ServiceDefaults.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.StackExchange.Redis.OutputCaching" Version="9.0.0" />
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="MudBlazor" Version="8.2.0" />
+    <PackageReference Include="MudBlazor.FontIcons.MaterialIcons" Version="1.2.0" />
+    <PackageReference Include="MudBlazor.ThemeManager" Version="3.0.0" />
+    <PackageReference Include="Refit" Version="8.0.0" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Components\Shared\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

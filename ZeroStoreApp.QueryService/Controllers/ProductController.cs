@@ -34,7 +34,7 @@ public class ProductController : BaseController
     /// <param name="cancellationToken"></param>
     /// <returns>list of <see cref="PaginatedProductResponse"/></returns>
     [HttpGet]
-    [ProducesResponseType(typeof(ApiResponseWithData<PaginatedList<PaginatedProductResponse>>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(PaginatedResponse<PaginatedList<PaginatedProductResponse>>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProducts([FromQuery] GetPaginatedProductsQuery query, CancellationToken cancellationToken)

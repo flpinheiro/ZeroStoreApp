@@ -32,6 +32,8 @@ public abstract class BaseController : ControllerBase
                 CurrentPage = pagedList.CurrentPage,
                 TotalPages = pagedList.TotalPages,
                 TotalCount = pagedList.TotalCount,
+                HasNext =  pagedList.HasNext,
+                HasPrevious = pagedList.HasPrevious,
                 Success = true,
                 Message = string.Format(message, args)
             });

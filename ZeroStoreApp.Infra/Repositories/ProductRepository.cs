@@ -23,8 +23,8 @@ public class ProductRepository : BaseRepository<Product>, IProductRepository
         {
             query = query
                 .Where(p =>
-                p.Name.ToLowerInvariant().Contains(request.Query.ToLowerInvariant()) ||
-                p.Description.ToLowerInvariant().Contains(request.Query.ToLowerInvariant()));
+                p.Name.Contains(request.Query, StringComparison.OrdinalIgnoreCase) ||
+                p.Description.Contains(request.Query, StringComparison.OrdinalIgnoreCase));
         }
         return await query.ToPaginatedListAsync(request.Page, request.PageSize);
     }
