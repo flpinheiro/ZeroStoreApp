@@ -6,7 +6,7 @@ using ZeroStoreApp.QueryApplication.Queries;
 using ZeroStoreApp.Tests.Fixtures;
 using ZeroStoreApp.Tests.TestData.Entities;
 
-namespace ZeroStoreApp.Tests.Handlers;
+namespace ZeroStoreApp.Tests.UnitTests.Handlers;
 
 public class ProductQueryHandlerTest : IDisposable
 {

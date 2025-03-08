@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ZeroStoreApp.CrossCutting.Common;
 
-public abstract class BaseController : ControllerBase
+public abstract class ApiController : ControllerBase
 {
     protected IActionResult Ok<T>(T data, string message, params object[] args) =>
         base.Ok(new ApiResponseWithData<T>

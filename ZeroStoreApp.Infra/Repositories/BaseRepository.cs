@@ -13,27 +13,20 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
         _context = context;
     }
 
-    public virtual async Task<TEntity?> AddAsync(TEntity entity, CancellationToken cancellationToken)
+    public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken)
     {
         _context.Set<TEntity>().Add(entity);
         await _context.SaveChangesAsync(cancellationToken);
-        return entity;
     }
 
-    public virtual async Task<TEntity?> DeleteAsync(Guid id, CancellationToken cancellationToken)
+    public virtual async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         var entity = await GetByIdAsync(id, cancellationToken);
-        if (entity is null) return null;
+        if (entity is null) return;
 
         entity.Delete();
         _context.Set<TEntity>().Update(entity);
         await _context.SaveChangesAsync(cancellationToken);
-        return entity;
-    }
-
-    public virtual async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken)
-    {
-        return await _context.Set<TEntity>().ToListAsync(cancellationToken);
     }
 
     public virtual async Task<TEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
@@ -44,12 +37,11 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
             .FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
 
-    public virtual async Task<TEntity?> UpdateAsync(TEntity entity, CancellationToken cancellationToken)
+    public virtual async Task UpdateAsync(TEntity entity, CancellationToken cancellationToken)
     {
         entity.Update();
         _context.Set<TEntity>().Update(entity);
         await _context.SaveChangesAsync(cancellationToken);
-        return entity;
     }
 
     #region Dispose

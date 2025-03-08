@@ -11,9 +11,11 @@ public interface IUnitOfWork : IDisposable
     Task RollbackTransactionAsync(CancellationToken cancellationToken);
 
     IProductRepository Products { get; }
+    IOrderRepository Orders { get; }
 }
 
 public interface IUnitOfQuery : IDisposable
 {
     IQueryProductRepRepository Products { get; }
+    IQueryOrderRepository Orders { get; }
 }

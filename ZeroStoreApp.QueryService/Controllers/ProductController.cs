@@ -14,7 +14,7 @@ namespace ZeroStoreApp.QueryService.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class ProductController : BaseController
+public class ProductController : ApiController
 {
     private readonly IMediator _mediator;
 

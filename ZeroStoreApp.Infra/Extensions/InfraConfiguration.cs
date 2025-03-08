@@ -29,9 +29,15 @@ public static class InfraConfiguration
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IQueryProductRepRepository, ProductRepository>();
 
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IQueryOrderRepository, OrderRepository>();
+
         // add lazy services
         services.AddScopedLazy<IProductRepository>();
         services.AddScopedLazy<IQueryProductRepRepository>();
+
+        services.AddScopedLazy<IOrderRepository>();
+        services.AddScopedLazy<IQueryOrderRepository>();
 
         return services;
     }

@@ -33,4 +33,17 @@ public static class Definitions
         public const string StockRequiredMessage = "Stock is required";
         public static string StockPositive = "Stock must be positive";
     }
+
+    public static class OrderDefinition 
+    {
+        public const string ShouldHaveItemsMessage = "Should Have Items";
+
+        public const string ShouldHaveProductIdMessage = "Should Have Product Id not Null or empty";
+
+        public const int MaxQuantityAllowed = 30;
+
+        public const int MinQuantityAllowed = 1;
+
+        public static string QuantityAllowedMessage = $"Quantity Should be between {MinQuantityAllowed} and {MaxQuantityAllowed}";
+    }
 }
