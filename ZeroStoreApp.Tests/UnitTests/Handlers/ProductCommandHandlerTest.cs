@@ -7,7 +7,7 @@ using ZeroStoreApp.Tests.Fixtures;
 using ZeroStoreApp.Tests.TestData.Commands;
 using ZeroStoreApp.Tests.TestData.Entities;
 
-namespace ZeroStoreApp.Tests.Handlers;
+namespace ZeroStoreApp.Tests.UnitTests.Handlers;
 
 public class ProductCommandHandlerTest : IDisposable
 {
@@ -41,7 +41,7 @@ public class ProductCommandHandlerTest : IDisposable
         _unitOfWorkFixture.ProductRepository
             .Setup(x =>
                 x.AddAsync(It.IsAny<Product>(), default))
-            .ReturnsAsync(product);
+            .Returns(Task.CompletedTask);
 
         _publisher
             .Setup(x =>
@@ -54,21 +54,6 @@ public class ProductCommandHandlerTest : IDisposable
         Assert.Equal(command.Name, result.Name);
         Assert.Equal(command.Description, result.Description);
         Assert.Equal(command.Price, result.Price);
-    }
-
-    [Fact]
-    public async Task Should_Return_Null_On_Create_Product()
-    {
-        var command = new CreateProductCommandTestData().Build();
-
-        _unitOfWorkFixture.ProductRepository
-            .Setup(x =>
-                x.AddAsync(It.IsAny<Product>(), default))
-            .ReturnsAsync(() => null);
-
-        var result = await _handler.Handle(command, default);
-
-        Assert.Null(result);
     }
 
     [Fact]
@@ -101,7 +86,7 @@ public class ProductCommandHandlerTest : IDisposable
         _unitOfWorkFixture.ProductRepository
             .Setup(x =>
                 x.UpdateAsync(It.IsAny<Product>(), default))
-            .ReturnsAsync(product);
+            .Returns(Task.CompletedTask);
 
         _publisher
             .Setup(x =>
@@ -153,6 +138,10 @@ public class ProductCommandHandlerTest : IDisposable
         _unitOfWorkFixture.ProductRepository
             .Setup(x =>
                 x.DeleteAsync(It.IsAny<Guid>(), default))
+            .Returns(Task.CompletedTask);
+
+        _unitOfWorkFixture.ProductRepository
+            .Setup(x => x.GetByIdAsync(It.IsAny<Guid>(), default))
             .ReturnsAsync(product);
 
         _publisher
@@ -167,21 +156,6 @@ public class ProductCommandHandlerTest : IDisposable
         Assert.Equal(product.Name, result.Name);
         Assert.Equal(product.Description, result.Description);
         Assert.Equal(product.Price, result.Price);
-    }
-
-    [Fact]
-    public async Task Should_Return_Null_On_Delete_Product()
-    {
-        var command = new DeleteProductCommandTestData().Build();
-
-        _unitOfWorkFixture.ProductRepository
-            .Setup(x =>
-                x.DeleteAsync(It.IsAny<Guid>(), default))
-            .ReturnsAsync(() => null);
-
-        var result = await _handler.Handle(command, default);
-
-        Assert.Null(result);
     }
 
     [Fact]

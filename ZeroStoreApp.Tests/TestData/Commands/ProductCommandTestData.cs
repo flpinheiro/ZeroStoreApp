@@ -2,13 +2,16 @@
 
 namespace ZeroStoreApp.Tests.TestData.Commands;
 
-internal class CreateProductCommandTestData
+internal class CreateProductCommandTestData : BasicTestData<CreateProductCommand>
 {
-    protected Faker<CreateProductCommand> faker = new Faker<CreateProductCommand>(Locale)
+    public CreateProductCommandTestData()
+    {
+        faker
         .RuleFor(p => p.Name, f => f.Commerce.Product())
         .RuleFor(p => p.Description, f => f.Commerce.ProductDescription())
         .RuleFor(p => p.Price, f => f.Random.Decimal(1, 100))
         .RuleFor(p => p.Stock, f => f.Random.Int(1, 1000));
+    }
 
     public CreateProductCommandTestData WithName(string name)
     {
@@ -33,19 +36,18 @@ internal class CreateProductCommandTestData
         faker.RuleFor(p => p.Stock, f => stock);
         return this;
     }
-
-    public virtual CreateProductCommand Build() { return faker; }
-
 }
 
-internal class UpdateProductCommandTestData
+internal class UpdateProductCommandTestData: BasicTestData<UpdateProductCommand>
 {
-    protected Faker<UpdateProductCommand> faker = new Faker<UpdateProductCommand>(Locale)
-        .RuleFor(p => p.Id, f => f.Random.Uuid())
+    public UpdateProductCommandTestData()
+    {
+        faker.RuleFor(p => p.Id, f => f.Random.Uuid())
         .RuleFor(p => p.Name, f => f.Commerce.Product())
         .RuleFor(p => p.Description, f => f.Commerce.ProductDescription())
         .RuleFor(p => p.Price, f => f.Random.Decimal(1, 100))
         .RuleFor(p => p.Stock, f => f.Random.Int(1, 1000));
+    }   
     public UpdateProductCommandTestData WithId(Guid id)
     {
         faker.RuleFor(p => p.Id, f => id);
@@ -71,17 +73,18 @@ internal class UpdateProductCommandTestData
         faker.RuleFor(p => p.Stock, f => stock);
         return this;
     }
-    public virtual UpdateProductCommand Build() { return faker; }
 }
 
-internal class DeleteProductCommandTestData
+internal class DeleteProductCommandTestData : BasicTestData<DeleteProductCommand>
 {
-    protected Faker<DeleteProductCommand> faker = new Faker<DeleteProductCommand>(Locale)
-        .RuleFor(p => p.Id, f => f.Random.Uuid());
+    public DeleteProductCommandTestData()
+    {
+        faker.RuleFor(p => p.Id, f => f.Random.Uuid());
+    }
+   
     public DeleteProductCommandTestData WithId(Guid id)
     {
         faker.RuleFor(p => p.Id, f => id);
         return this;
     }
-    public virtual DeleteProductCommand Build() { return faker; }
 }

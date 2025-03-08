@@ -3,16 +3,17 @@ using ZeroStoreApp.Domain.Enities;
 
 namespace ZeroStoreApp.Tests.TestData.Entities;
 
-internal abstract class BaseEntityTestData<TClass> where TClass : BaseEntity
+internal abstract class BaseEntityTestData<TClass> : BasicTestData<TClass> where TClass : BaseEntity
 {
-    protected Faker<TClass> faker =
-        new Faker<TClass>(Locale)
-        .StrictMode(true)
+    protected BaseEntityTestData()
+    {
+        faker
         .RuleFor(p => p.Id, f => f.Random.Uuid())
         .RuleFor(p => p.CreatedAt, f => f.Date.Past())
         .RuleFor(p => p.IsDeleted, f => f.Random.Bool())
         .RuleFor(p => p.UpdatedAt, f => null)
         .RuleFor(p => p.DeletedAt, (f, c) => c.IsDeleted ? f.Date.Past() : null);
+    }
 
     public BaseEntityTestData<TClass> WithUpdate(DateTime updatedAt)
     {
@@ -27,10 +28,6 @@ internal abstract class BaseEntityTestData<TClass> where TClass : BaseEntity
             .RuleFor(p => p.DeletedAt, (f, c) => (isDelete && deleteAt == null) ? f.Date.Past(refDate: c.CreatedAt) : deleteAt);
         return this;
     }
-
-    public virtual TClass Build() { return faker; }
-
-    public virtual IEnumerable<TClass> Build(int count) { return faker.Generate(count); }
 
     public virtual PaginatedList<TClass> Build(int count, int page, int pageSize)
     {

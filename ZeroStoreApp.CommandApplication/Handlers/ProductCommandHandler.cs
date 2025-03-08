@@ -52,7 +52,7 @@ public class ProductCommandHandler :
 
         var product = _mapper.Map<Product>(request);
 
-        product = await _unitOfWork.Products.AddAsync(product, cancellationToken);
+        await _unitOfWork.Products.AddAsync(product, cancellationToken);
 
         if (product == null || request == null) return null;
 
@@ -105,7 +105,9 @@ public class ProductCommandHandler :
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var product = await _unitOfWork.Products.DeleteAsync(request.Id, cancellationToken);
+        var product = await _unitOfWork.Products.GetByIdAsync(request.Id, cancellationToken);
+
+        await _unitOfWork.Products.DeleteAsync(request.Id, cancellationToken);
 
         if (product == null || request == null) return null;
 

@@ -49,7 +49,7 @@ namespace ZeroStoreApp.Infra.Data.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal>("TotalValue")
                         .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 

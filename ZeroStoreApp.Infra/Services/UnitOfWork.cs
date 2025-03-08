@@ -8,17 +8,22 @@ public class UnitOfWork : IUnitOfWork
 {
     private ZeroStoreAppDbContext? _context;
     private readonly Lazy<IProductRepository> _lazyProductRepository;
+    private readonly Lazy<IOrderRepository> _lazyOrderRepository;
 
     private IDbContextTransaction? _contextTransaction;
 
     public UnitOfWork(ZeroStoreAppDbContext context,
-        Lazy<IProductRepository> lazyProductRepository)
+        Lazy<IProductRepository> lazyProductRepository,
+        Lazy<IOrderRepository> lazyOrderRepository)
     {
         _context = context;
         _lazyProductRepository = lazyProductRepository;
+        _lazyOrderRepository = lazyOrderRepository;
     }
 
     public IProductRepository Products => _lazyProductRepository.Value ?? throw new ArgumentNullException(nameof(IProductRepository));
+
+    public IOrderRepository Orders => _lazyOrderRepository.Value ?? throw new ArgumentNullException(nameof(IOrderRepository));
 
     public async Task BegingTransactionAsync(CancellationToken cancellationToken)
     {
@@ -54,9 +59,13 @@ public class UnitOfWork : IUnitOfWork
                 _contextTransaction.Dispose();
                 _contextTransaction = null;
             }
-            if (_lazyProductRepository.IsValueCreated && _lazyProductRepository.Value is IDisposable disposable)
+            if (_lazyProductRepository.IsValueCreated && _lazyProductRepository.Value is IDisposable disposableProductRepository)
             {
-                disposable.Dispose();
+                disposableProductRepository.Dispose();
+            }
+            if (_lazyOrderRepository.IsValueCreated && _lazyOrderRepository.Value is IDisposable disposableOrderRepository) 
+            {
+                disposableOrderRepository.Dispose();
             }
             if (_context is not null && _context is IDisposable disposableContext)
             {
@@ -71,13 +80,16 @@ public class UnitOfWork : IUnitOfWork
 public class UnitOfQuery : IUnitOfQuery
 {
     private readonly Lazy<IQueryProductRepRepository> _lazyProductRepository;
+    private readonly Lazy<IQueryOrderRepository> _lazyOrderRepository;
 
-    public UnitOfQuery(Lazy<IQueryProductRepRepository> lazyProductRepository)
+    public UnitOfQuery(Lazy<IQueryProductRepRepository> lazyProductRepository, Lazy<IQueryOrderRepository> lazyOrderRepository)
     {
         _lazyProductRepository = lazyProductRepository;
+        _lazyOrderRepository = lazyOrderRepository;
     }
 
     public IQueryProductRepRepository Products => _lazyProductRepository.Value;
+    public IQueryOrderRepository Orders => _lazyOrderRepository.Value;
 
     #region Dispose
     public void Dispose()
@@ -90,9 +102,13 @@ public class UnitOfQuery : IUnitOfQuery
     {
         if (disposing)
         {
-            if (_lazyProductRepository.IsValueCreated && _lazyProductRepository.Value is IDisposable disposable)
+            if (_lazyProductRepository.IsValueCreated && _lazyProductRepository.Value is IDisposable disposableProductRepository)
             {
-                disposable.Dispose();
+                disposableProductRepository.Dispose();
+            }
+            if (_lazyOrderRepository.IsValueCreated && _lazyOrderRepository is IDisposable disposableOrderRepository) 
+            { 
+                disposableOrderRepository.Dispose();
             }
         }
     }

@@ -10,5 +10,6 @@ public interface IProductRepository : IBaseRepository<Product>, IQueryProductRep
 
 public interface IQueryProductRepRepository : IBaseQueryRepository<Product>
 {
+    Task<IEnumerable<Product>> GetManyByIdAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken);
     Task<PaginatedList<Product>> GetPaginatedAsync(PaginatedProductRequest request, CancellationToken cancellationToken);
 }

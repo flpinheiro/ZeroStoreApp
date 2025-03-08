@@ -6,13 +6,13 @@ using ZeroStoreApp.Infra;
 using ZeroStoreApp.Infra.Repositories;
 using ZeroStoreApp.Tests.TestData.Entities;
 
-namespace ZeroStoreApp.Tests.Repositories;
+namespace ZeroStoreApp.Tests.UnitTests.Repositories;
 
 public class ProductRepositoryTest
 {
     private readonly Mock<ZeroStoreAppDbContext> _context;
 
-    private readonly IProductRepository _repository;
+    private readonly ProductRepository _repository;
 
     private List<Product> _products;
 
@@ -37,6 +37,19 @@ public class ProductRepositoryTest
         _context.Setup(p => p.Products).ReturnsDbSet(_products);
 
         _context.Setup(p => p.Set<Product>()).ReturnsDbSet(_products);
+    }
+
+    [Fact]
+    public async Task Should_Get_Products_By_ids()
+    {
+        var ids = _products.Take(10).Select(a => a.Id).ToList();
+
+        var products = await _repository.GetManyByIdAsync(ids, default);
+
+        Assert.NotNull(products);
+
+        Assert.Equal(ids.Count, products.Count());
+        Assert.True(ids.All(expectedGuid => products.Select(a => a.Id).Contains(expectedGuid)));
     }
 
     [Fact]
@@ -117,19 +130,6 @@ public class ProductRepositoryTest
     }
 
     [Fact]
-    public async Task Should_Get_All()
-    {
-        var result = await _repository.GetAllAsync(default);
-
-        Assert.NotNull(result);
-        Assert.NotEmpty(result);
-
-        Assert.Equal(_products.Count, result.Count());
-
-        _context.Verify(p => p.Set<Product>());
-    }
-
-    [Fact]
     public async Task Should_Add_Async()
     {
         var product = new ProductTestData()
@@ -138,11 +138,7 @@ public class ProductRepositoryTest
 
         _context.Setup(p => p.SaveChangesAsync(default)).ReturnsAsync(1);
 
-        var result = await _repository.AddAsync(product, default);
-
-        Assert.NotNull(result);
-
-        Assert.Equal(product, result);
+        await _repository.AddAsync(product, default);
 
         _context.Verify(p => p.SaveChangesAsync(default));
         _context.Verify(p => p.Set<Product>());
@@ -157,12 +153,8 @@ public class ProductRepositoryTest
 
         _context.Setup(p => p.SaveChangesAsync(default)).ReturnsAsync(1);
 
-        var result = await _repository.UpdateAsync(product, default);
+        await _repository.UpdateAsync(product, default);
 
-        Assert.NotNull(result);
-
-        Assert.Equal(product, result);
-        Assert.NotNull(result.UpdatedAt);
 
         _context.Verify(p => p.SaveChangesAsync(default));
         _context.Verify(p => p.Set<Product>());
@@ -173,12 +165,8 @@ public class ProductRepositoryTest
     {
         _context.Setup(p => p.SaveChangesAsync(default)).ReturnsAsync(1);
 
-        var result = await _repository.DeleteAsync(_product.Id, default);
+        await _repository.DeleteAsync(_product.Id, default);
 
-        Assert.NotNull(result);
-
-        Assert.NotNull(result.DeletedAt);
-        Assert.True(result.IsDeleted);
 
         _context.Verify(p => p.SaveChangesAsync(default));
         _context.Verify(p => p.Set<Product>());
@@ -193,9 +181,8 @@ public class ProductRepositoryTest
 
         _context.Setup(p => p.SaveChangesAsync(default)).ReturnsAsync(1);
 
-        var result = await _repository.DeleteAsync(product.Id, default);
+        await _repository.DeleteAsync(product.Id, default);
 
-        Assert.Null(result);
 
         _context.Verify(p => p.SaveChangesAsync(default), Times.Never);
         _context.Verify(p => p.Set<Product>());

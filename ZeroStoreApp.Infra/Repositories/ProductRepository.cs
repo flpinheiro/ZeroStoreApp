@@ -7,10 +7,11 @@ using ZeroStoreApp.Infra.Extensions;
 
 namespace ZeroStoreApp.Infra.Repositories;
 
-public class ProductRepository : BaseRepository<Product>, IProductRepository
+public class ProductRepository(ZeroStoreAppDbContext context) : BaseRepository<Product>(context), IProductRepository
 {
-    public ProductRepository(ZeroStoreAppDbContext context) : base(context)
+    public async Task<IEnumerable<Product>> GetManyByIdAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
     {
+        return await context.Products.Where(product => ids.Contains(product.Id)).ToListAsync(cancellationToken);
     }
 
     public async Task<PaginatedList<Product>> GetPaginatedAsync(PaginatedProductRequest request, CancellationToken cancellationToken)
