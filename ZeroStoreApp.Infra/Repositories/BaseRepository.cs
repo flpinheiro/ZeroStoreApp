@@ -8,7 +8,8 @@ public abstract class BaseRepository<TEntity> : IBaseRepository<TEntity> where T
 {
     protected readonly ZeroStoreAppDbContext _context;
     protected bool _disposed = false;
-    public BaseRepository(ZeroStoreAppDbContext context)
+
+    protected BaseRepository(ZeroStoreAppDbContext context)
     {
         _context = context;
     }
