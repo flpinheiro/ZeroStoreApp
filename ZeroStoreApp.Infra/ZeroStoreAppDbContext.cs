@@ -14,6 +14,7 @@ public class ZeroStoreAppDbContext : DbContext
     }
 
     public virtual DbSet<Product> Products { get; private set; }
+    public virtual DbSet<Order> Orders { get; private set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

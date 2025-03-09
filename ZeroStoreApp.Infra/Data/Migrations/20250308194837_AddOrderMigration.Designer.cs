@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZeroStoreApp.Infra;
 
@@ -11,9 +12,11 @@ using ZeroStoreApp.Infra;
 namespace ZeroStoreApp.Infra.Data.Migrations
 {
     [DbContext(typeof(ZeroStoreAppDbContext))]
-    partial class ZeroStoreAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250308194837_AddOrderMigration")]
+    partial class AddOrderMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
