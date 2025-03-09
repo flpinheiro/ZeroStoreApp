@@ -29,10 +29,7 @@ public class OrderCommandHandler(IUnitOfWork unitOfWork, IPublisher publisher) :
         {
             var item = request.Items.FirstOrDefault(a => a.ProductId == product.Id);
             if (item is null) continue;
-            var orderItem = new OrderItem(product, item.Quantity)
-            {
-                Order = order
-            };
+            var orderItem = new OrderItem(product, order, item.Quantity);
             order.AddItem(orderItem);
         }
 

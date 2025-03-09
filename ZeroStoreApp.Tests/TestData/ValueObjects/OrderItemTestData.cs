@@ -37,12 +37,12 @@ internal class OrderItemTestData : BasicTestData<OrderItem>
             .RuleFor(o => o.TotalValue, faker => faker.Random.Decimal(1, 30));
     }
 
-    public static IEnumerable<OrderItem> Build(IEnumerable<Product> products)
+    public static IEnumerable<OrderItem> Build(IEnumerable<Product> products, Order order)
     {
         var list = new List<OrderItem>(products.Count());
         foreach (var product in products) 
         {
-            var orderItem = new OrderItem(product, 10);
+            var orderItem = new OrderItem(product, order, 10);
             list.Add(orderItem);
         }
         return list;

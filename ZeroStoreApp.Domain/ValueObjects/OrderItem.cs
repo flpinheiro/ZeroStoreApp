@@ -12,11 +12,13 @@ public record OrderItem : ValueRecord
     private decimal discount;
     private int quantity;
 
-    public OrderItem(Product product, int quantity)
+    public OrderItem(Product product, Order order, int quantity)
     {
         ProductId = product.Id;
         UnitValue = product.Price;
         Product = product;
+        Order = order;
+        OrderId = order.Id;
         Name = product.Name;
         Discount = product.CalculateDiscount(quantity);
         Quantity = quantity;
