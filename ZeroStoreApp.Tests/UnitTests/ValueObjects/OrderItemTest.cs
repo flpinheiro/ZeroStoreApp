@@ -24,7 +24,8 @@ public class OrderItemTest
         {
             Price = 10,
         };
-        var orderItem = new OrderItem(product, quantity);
+        var order = new Order();
+        var orderItem = new OrderItem(product, order, quantity);
 
         Assert.Equal(expectedTotalValue, orderItem.TotalValue);
     }

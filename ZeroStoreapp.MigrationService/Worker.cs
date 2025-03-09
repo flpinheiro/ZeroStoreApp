@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using OpenTelemetry.Trace;
 using System.Diagnostics;
+using ZeroStoreapp.MigrationService.SeedData;
+using ZeroStoreApp.Domain.Enities;
 using ZeroStoreApp.Infra;
 
 namespace ZeroStoreapp.MigrationService;
@@ -71,6 +73,31 @@ public class Worker(
         {
             // Seed the database
             await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+
+            int count = 10;
+
+            if (!dbContext.Products.Any())
+            {
+                var products = ProductSeedData.GetProducts();
+                dbContext.Products.AddRange(products);
+            }
+
+            await dbContext.SaveChangesAsync(cancellationToken);
+
+            if (!dbContext.Orders.Any())
+            {
+                var products = dbContext.Products.ToList();
+
+                for (int i = 0; i < count; i++)
+                {
+                    var order = new Order();
+                    var orderItemList = OrderItemSeedData.GetOrderItems(products, order);
+
+                    order.AddItem(orderItemList);
+
+                    dbContext.Orders.Add(order);
+                }
+            }
 
             //add seeding here
 

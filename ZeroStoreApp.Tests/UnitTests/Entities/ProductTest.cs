@@ -37,7 +37,7 @@ public class OrderTest
 
         var products = new ProductTestData().Build(10);
 
-        var orderItems = OrderItemTestData.Build(products);
+        var orderItems = OrderItemTestData.Build(products, order);
 
         var orderItem = new OrderItemTestData().Build();
 
