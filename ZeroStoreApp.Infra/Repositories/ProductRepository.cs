@@ -9,9 +9,9 @@ namespace ZeroStoreApp.Infra.Repositories;
 
 public class ProductRepository : BaseRepository<Product>, IProductRepository
 {
-    public ProductRepository(ZeroStoreAppDbContext context): base(context)
+    public ProductRepository(ZeroStoreAppDbContext context) : base(context)
     {
-        
+
     }
     public async Task<IEnumerable<Product>> GetManyByIdAsync(IEnumerable<Guid> ids, CancellationToken cancellationToken)
     {

@@ -8,7 +8,7 @@ namespace ZeroStoreApp.Tests.Fixtures;
 public class UnitOfWorkFixture
 {
     private readonly IUnitOfWork _unitOfWork;
-    
+
     private readonly Lazy<IProductRepository> lazyProductRepository;
     private readonly Mock<IProductRepository> _productRepository;
 
@@ -16,7 +16,7 @@ public class UnitOfWorkFixture
     private readonly Mock<IOrderRepository> _orderRepository;
 
     private readonly Mock<ZeroStoreAppDbContext> _context;
-    
+
     public IUnitOfWork UnitOfWork { get => _unitOfWork; }
     public Mock<ZeroStoreAppDbContext> DbContext { get => _context; }
     public Mock<IProductRepository> ProductRepository { get => _productRepository; }

@@ -51,9 +51,6 @@ public class ProductCommandHandlerTest : IDisposable
         var result = await _handler.Handle(command, default);
 
         Assert.NotNull(result);
-        Assert.Equal(command.Name, result.Name);
-        Assert.Equal(command.Description, result.Description);
-        Assert.Equal(command.Price, result.Price);
     }
 
     [Fact]
@@ -96,10 +93,6 @@ public class ProductCommandHandlerTest : IDisposable
         var result = await _handler.Handle(command, default);
 
         Assert.NotNull(result);
-        Assert.Equal(command.Id, result.Id);
-        Assert.Equal(command.Name, result.Name);
-        Assert.Equal(command.Description, result.Description);
-        Assert.Equal(command.Price, result.Price);
     }
 
     [Fact]
@@ -152,10 +145,6 @@ public class ProductCommandHandlerTest : IDisposable
         var result = await _handler.Handle(command, default);
 
         Assert.NotNull(result);
-        Assert.Equal(product.Id, result.Id);
-        Assert.Equal(product.Name, result.Name);
-        Assert.Equal(product.Description, result.Description);
-        Assert.Equal(product.Price, result.Price);
     }
 
     [Fact]

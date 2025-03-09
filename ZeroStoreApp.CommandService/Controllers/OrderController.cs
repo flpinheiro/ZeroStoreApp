@@ -9,15 +9,8 @@ namespace ZeroStoreApp.CommandService.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class OrderController: ApiController 
-{ 
-    private readonly IMediator _mediator;
-
-    public OrderController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
+public sealed class OrderController(IMediator mediator) : ApiController
+{
     [HttpPost]
     public async Task<IActionResult> CreateOrder([FromBody] CreateOrderCommand command, CancellationToken cancellationToken)
     {
@@ -29,8 +22,8 @@ public class OrderController: ApiController
             return BadRequest(validationResult.Errors, ResponseMessages.ValidationFailed);
         }
 
-        await _mediator.Send(command, cancellationToken);
-        
+        await mediator.Send(command, cancellationToken);
+
         return Ok();
     }
 }

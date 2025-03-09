@@ -7,4 +7,4 @@ public record PaginatedProductRequest : PaginatedRequest
     public string? Query { get; set; }
 }
 
-public record PaginateOrderRequest: PaginatedRequest { }
+public record PaginateOrderRequest : PaginatedRequest { }

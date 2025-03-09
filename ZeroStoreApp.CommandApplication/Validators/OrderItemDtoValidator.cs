@@ -3,7 +3,7 @@ using ZeroStoreApp.CommandApplication.Dtos;
 
 namespace ZeroStoreApp.CommandApplication.Validators;
 
-public class OrderItemDtoValidator : AbstractValidator<OrderItemDto> 
+public class OrderItemDtoValidator : AbstractValidator<OrderItemDto>
 {
     public OrderItemDtoValidator()
     {

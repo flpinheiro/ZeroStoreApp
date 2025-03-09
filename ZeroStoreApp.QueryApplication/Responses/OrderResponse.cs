@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZeroStoreApp.CrossCutting.Enums;
+﻿using ZeroStoreApp.CrossCutting.Enums;
 
 namespace ZeroStoreApp.QueryApplication.Responses;
 
@@ -16,7 +11,7 @@ public record OrderResponse
     public IEnumerable<OrderItemResponse> Items { get; set; } = [];
 }
 
-public record PaginatedOrderResponse 
+public record PaginatedOrderResponse
 {
     public Guid Id { get; set; }
     public decimal TotalValue { get; set; }

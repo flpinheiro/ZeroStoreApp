@@ -4,7 +4,6 @@ using ZeroStoreApp.CommandApplication.Commands;
 using ZeroStoreApp.CommandApplication.Validators;
 using ZeroStoreApp.CrossCutting.Common;
 using ZeroStoreApp.CrossCutting.Constants;
-using ZeroStoreApp.Domain.Responses;
 
 namespace ZeroStoreApp.CommandService.Controllers;
 
@@ -13,27 +12,16 @@ namespace ZeroStoreApp.CommandService.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class ProductController : ApiController
+public sealed class ProductController(IMediator mediator) : ApiController
 {
-    private readonly IMediator _mediator;
-
-    /// <summary>
-    /// Constructor for ProductController
-    /// </summary>
-    /// <param name="mediator"></param>
-    public ProductController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     /// <summary>
     /// Create a new product
     /// </summary>
     /// <param name="command"><see cref="CreateProductCommand"/> create a product command</param>
     /// <param name="cancellationToken"></param>
-    /// <returns><see cref="ProductResponse"/></returns>
+    /// <returns><see cref="Guid"/></returns>
     [HttpPost]
-    [ProducesResponseType(typeof(ApiResponseWithData<ProductResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponseWithData<Guid>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> CreateProduct([FromBody] CreateProductCommand command, CancellationToken cancellationToken)
@@ -45,13 +33,13 @@ public class ProductController : ApiController
         {
             return BadRequest(validationResult.Errors, ResponseMessages.ValidationFailed);
         }
-        var response = await _mediator.Send(command, cancellationToken);
+        var response = await mediator.Send(command, cancellationToken);
 
         if (response == null)
         {
             return NotFound();
         }
-        return Ok(response, ResponseMessages.Products.ProductCreated, response.Id);
+        return Ok(response, ResponseMessages.Products.ProductCreated, response);
     }
 
     /// <summary>
@@ -59,9 +47,9 @@ public class ProductController : ApiController
     /// </summary>
     /// <param name="command"><see cref="UpdateProductCommand"/> Update a Product Command</param>
     /// <param name="cancellationToken"></param>
-    /// <returns><see cref="ProductResponse"/></returns>
+    /// <returns><see cref="Guid"/></returns>
     [HttpPut]
-    [ProducesResponseType(typeof(ApiResponseWithData<ProductResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponseWithData<Guid>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductCommand command, CancellationToken cancellationToken)
@@ -72,12 +60,12 @@ public class ProductController : ApiController
         {
             return BadRequest(validationResult.Errors, ResponseMessages.ValidationFailed);
         }
-        var response = await _mediator.Send(command, cancellationToken);
+        var response = await mediator.Send(command, cancellationToken);
         if (response == null)
         {
             return NotFound();
         }
-        return Ok(response, ResponseMessages.Products.ProductUpdated, response.Id);
+        return Ok(response, ResponseMessages.Products.ProductUpdated, response);
     }
 
     /// <summary>
@@ -85,9 +73,9 @@ public class ProductController : ApiController
     /// </summary>
     /// <param name="id">product id to be deleted</param>
     /// <param name="cancellationToken"></param>
-    /// <returns><see cref="ProductResponse"/></returns>
+    /// <returns><see cref="Guid"/></returns>
     [HttpDelete("{id}")]
-    [ProducesResponseType(typeof(ApiResponseWithData<ProductResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(ApiResponseWithData<Guid>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
     public async Task<IActionResult> DeleteProduct([FromRoute] Guid id, CancellationToken cancellationToken)
@@ -100,11 +88,11 @@ public class ProductController : ApiController
         {
             return BadRequest(validationResult.Errors, ResponseMessages.ValidationFailed);
         }
-        var response = await _mediator.Send(command, cancellationToken);
+        var response = await mediator.Send(command, cancellationToken);
         if (response == null)
         {
             return NotFound();
         }
-        return Ok(response, ResponseMessages.Products.ProductDeleted, response.Id);
+        return Ok(response, ResponseMessages.Products.ProductDeleted, response);
     }
 }

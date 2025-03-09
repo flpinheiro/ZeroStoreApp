@@ -32,7 +32,7 @@ public abstract class ApiController : ControllerBase
                 CurrentPage = pagedList.CurrentPage,
                 TotalPages = pagedList.TotalPages,
                 TotalCount = pagedList.TotalCount,
-                HasNext =  pagedList.HasNext,
+                HasNext = pagedList.HasNext,
                 HasPrevious = pagedList.HasPrevious,
                 Success = true,
                 Message = string.Format(message, args)

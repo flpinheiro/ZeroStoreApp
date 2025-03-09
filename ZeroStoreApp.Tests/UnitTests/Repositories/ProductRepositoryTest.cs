@@ -1,6 +1,5 @@
 ﻿using Moq.EntityFrameworkCore;
 using ZeroStoreApp.Domain.Enities;
-using ZeroStoreApp.Domain.Repositories;
 using ZeroStoreApp.Domain.Requests;
 using ZeroStoreApp.Infra;
 using ZeroStoreApp.Infra.Repositories;

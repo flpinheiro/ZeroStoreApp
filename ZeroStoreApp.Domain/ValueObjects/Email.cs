@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace ZeroStoreApp.Domain.ValueObjects;
+﻿namespace ZeroStoreApp.Domain.ValueObjects;
 
 public record Email : IEquatable<Email>
 {
@@ -28,7 +26,7 @@ public record Email : IEquatable<Email>
         return new Email(value);
     }
 
-    private static bool IsValidEmail(string email) 
+    private static bool IsValidEmail(string email)
         => EmailValidation.EmailValidator.Validate(email);
 
     public override string ToString() => _value;

@@ -3,7 +3,7 @@ using ZeroStoreApp.CommandApplication.Commands;
 
 namespace ZeroStoreApp.CommandApplication.Validators;
 
-public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand> 
+public class CreateOrderCommandValidator : AbstractValidator<CreateOrderCommand>
 {
     public CreateOrderCommandValidator()
     {

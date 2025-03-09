@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ZeroStoreApp.Domain.ValueObjects;
+﻿namespace ZeroStoreApp.Domain.ValueObjects;
 
 public abstract class ValueObject : IEquatable<ValueObject>
 {
