@@ -10,9 +10,13 @@ internal class OrderConfiguration : BaseEntityConfiguration<Order>, IEntityTypeC
 {
     public override void Configure(EntityTypeBuilder<Order> builder)
     {
-        base.Configure(builder); base.Configure(builder);
+        base.Configure(builder);
 
         builder.Property(x => x.TotalValue)
+            .HasPrecision(ProductDefinition.PricePrecision, ProductDefinition.PriceScale)
+            .IsRequired();
+
+        builder.Property(x => x.Status)
             .IsRequired();
 
         builder.OwnsMany(x => x.Items, item =>
@@ -20,7 +24,15 @@ internal class OrderConfiguration : BaseEntityConfiguration<Order>, IEntityTypeC
             item.WithOwner(x => x.Order)
              .HasForeignKey(x => x.OrderId);
 
+            item.HasOne(x => x.Product)
+            .WithMany()
+            .HasForeignKey(x => x.ProductId);
+
             item.HasKey(x => new { x.OrderId, x.ProductId });
+
+            item.HasIndex(x => new { x.OrderId, x.ProductId })
+                .IsUnique();
+            item.HasIndex(x => new { x.OrderId });
 
             item.Property(x => x.ProductId)
              .IsRequired()
@@ -45,9 +57,8 @@ internal class OrderConfiguration : BaseEntityConfiguration<Order>, IEntityTypeC
              .HasColumnName(nameof(OrderItem.TotalValue));
             item.Property(x => x.Name)
              .IsRequired()
+             .HasMaxLength(ProductDefinition.NameMaxLength)
              .HasColumnName(nameof(OrderItem.Name));
-
-        }).ToTable("OrderItem");
-
+        });
     }
 }
