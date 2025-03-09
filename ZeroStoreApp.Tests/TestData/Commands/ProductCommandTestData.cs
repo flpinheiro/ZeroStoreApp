@@ -38,7 +38,7 @@ internal class CreateProductCommandTestData : BasicTestData<CreateProductCommand
     }
 }
 
-internal class UpdateProductCommandTestData: BasicTestData<UpdateProductCommand>
+internal class UpdateProductCommandTestData : BasicTestData<UpdateProductCommand>
 {
     public UpdateProductCommandTestData()
     {
@@ -47,7 +47,7 @@ internal class UpdateProductCommandTestData: BasicTestData<UpdateProductCommand>
         .RuleFor(p => p.Description, f => f.Commerce.ProductDescription())
         .RuleFor(p => p.Price, f => f.Random.Decimal(1, 100))
         .RuleFor(p => p.Stock, f => f.Random.Int(1, 1000));
-    }   
+    }
     public UpdateProductCommandTestData WithId(Guid id)
     {
         faker.RuleFor(p => p.Id, f => id);
@@ -81,7 +81,7 @@ internal class DeleteProductCommandTestData : BasicTestData<DeleteProductCommand
     {
         faker.RuleFor(p => p.Id, f => f.Random.Uuid());
     }
-   
+
     public DeleteProductCommandTestData WithId(Guid id)
     {
         faker.RuleFor(p => p.Id, f => id);

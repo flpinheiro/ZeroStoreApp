@@ -23,7 +23,7 @@ public class CreateProductModel
     public int Stock { get; set; }
 }
 
-public class UpdateProductModel 
+public class UpdateProductModel
 {
     public Guid Id { get; set; }
     public string? Name { get; set; }
@@ -32,7 +32,7 @@ public class UpdateProductModel
     public int Stock { get; set; }
 }
 
-public class ProductRequest 
+public class ProductRequest
 {
     public int Page { get; set; } = 1;
     public int PageSize { get; set; } = 10;

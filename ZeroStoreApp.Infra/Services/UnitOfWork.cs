@@ -63,7 +63,7 @@ public class UnitOfWork : IUnitOfWork
             {
                 disposableProductRepository.Dispose();
             }
-            if (_lazyOrderRepository.IsValueCreated && _lazyOrderRepository.Value is IDisposable disposableOrderRepository) 
+            if (_lazyOrderRepository.IsValueCreated && _lazyOrderRepository.Value is IDisposable disposableOrderRepository)
             {
                 disposableOrderRepository.Dispose();
             }
@@ -106,8 +106,8 @@ public class UnitOfQuery : IUnitOfQuery
             {
                 disposableProductRepository.Dispose();
             }
-            if (_lazyOrderRepository.IsValueCreated && _lazyOrderRepository is IDisposable disposableOrderRepository) 
-            { 
+            if (_lazyOrderRepository.IsValueCreated && _lazyOrderRepository is IDisposable disposableOrderRepository)
+            {
                 disposableOrderRepository.Dispose();
             }
         }

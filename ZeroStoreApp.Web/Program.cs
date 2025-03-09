@@ -1,7 +1,6 @@
-using ZeroStoreApp.Web;
-using ZeroStoreApp.Web.Components;
 using MudBlazor.Services;
 using Refit;
+using ZeroStoreApp.Web.Components;
 using ZeroStoreApp.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);

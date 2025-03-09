@@ -2,7 +2,7 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
-using ZeroStoreApp.Domain.Responses;
+using ZeroStoreApp.ConsumerService.Models;
 
 namespace ZeroStoreApp.ConsumerService;
 
@@ -22,7 +22,6 @@ public class ProductConsumerWorker : BackgroundService, IDisposable
                      autoDelete: false,
                      arguments: null);
     }
-
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZeroStoreApp.Domain.Enities;
+﻿using ZeroStoreApp.Domain.Enities;
 using ZeroStoreApp.Domain.ValueObjects;
 
 namespace ZeroStoreApp.Tests.TestData.ValueObjects;
@@ -26,7 +21,7 @@ internal class OrderItemTestData : BasicTestData<OrderItem>
 
                 return orderItem;
             })
-            .RuleFor(o=> o.Order, new Order())
+            .RuleFor(o => o.Order, new Order())
             .RuleFor(o => o.Product, new Product())
             .RuleFor(o => o.ProductId, faker => faker.Random.Uuid())
             .RuleFor(o => o.OrderId, faker => faker.Random.Uuid())
@@ -40,7 +35,7 @@ internal class OrderItemTestData : BasicTestData<OrderItem>
     public static IEnumerable<OrderItem> Build(IEnumerable<Product> products, Order order)
     {
         var list = new List<OrderItem>(products.Count());
-        foreach (var product in products) 
+        foreach (var product in products)
         {
             var orderItem = new OrderItem(product, order, 10);
             list.Add(orderItem);

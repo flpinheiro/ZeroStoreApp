@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ZeroStoreApp.CommandApplication.Dtos;
-using ZeroStoreApp.Domain.Enities;
+﻿using ZeroStoreApp.CommandApplication.Dtos;
 
 namespace ZeroStoreApp.Tests.TestData.Dtos;
 

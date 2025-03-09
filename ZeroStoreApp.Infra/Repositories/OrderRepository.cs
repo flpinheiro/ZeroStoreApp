@@ -8,9 +8,9 @@ namespace ZeroStoreApp.Infra.Repositories;
 
 public class OrderRepository : BaseRepository<Order>, IOrderRepository
 {
-    public OrderRepository(ZeroStoreAppDbContext context): base(context)
+    public OrderRepository(ZeroStoreAppDbContext context) : base(context)
     {
-        
+
     }
     public async Task<PaginatedList<Order>> GetPaginatedAsync(PaginateOrderRequest request, CancellationToken cancellationToken)
     {

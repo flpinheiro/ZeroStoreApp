@@ -1,9 +1,8 @@
 ﻿using MediatR;
-using ZeroStoreApp.Domain.Responses;
 
 namespace ZeroStoreApp.CommandApplication.Commands;
 
-public class CreateProductCommand : IRequest<ProductResponse>
+public class CreateProductCommand : IRequest<Guid?>
 {
     public string? Name { get; set; }
     public string? Description { get; set; }
@@ -11,7 +10,7 @@ public class CreateProductCommand : IRequest<ProductResponse>
     public int Stock { get; set; }
 }
 
-public class UpdateProductCommand : IRequest<ProductResponse>
+public class UpdateProductCommand : IRequest<Guid?>
 {
     public Guid Id { get; set; }
     public string? Name { get; set; }
@@ -20,7 +19,7 @@ public class UpdateProductCommand : IRequest<ProductResponse>
     public int Stock { get; set; }
 }
 
-public class DeleteProductCommand : IRequest<ProductResponse>
+public class DeleteProductCommand : IRequest<Guid?>
 {
     public Guid Id { get; set; }
 }

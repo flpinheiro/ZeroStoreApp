@@ -34,7 +34,7 @@ public static class Definitions
         public static string StockPositive = "Stock must be positive";
     }
 
-    public static class OrderDefinition 
+    public static class OrderDefinition
     {
         public const string ShouldHaveItemsMessage = "Should Have Items";
 

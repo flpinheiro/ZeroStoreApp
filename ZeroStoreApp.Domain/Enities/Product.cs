@@ -14,4 +14,12 @@ public class Product : BaseEntity
         else if (quantity <= 20) return 10;
         else return 15;
     }
+
+    public virtual void Update(Product product)
+    {
+        this.Name = product.Name;
+        this.Description = product.Description;
+        this.Price = product.Price;
+        this.Stock = product.Stock;
+    }
 }

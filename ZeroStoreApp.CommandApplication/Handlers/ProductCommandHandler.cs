@@ -3,28 +3,16 @@ using MediatR;
 using ZeroStoreApp.CommandApplication.Commands;
 using ZeroStoreApp.CommandApplication.Events;
 using ZeroStoreApp.Domain.Enities;
-using ZeroStoreApp.Domain.Responses;
 using ZeroStoreApp.Domain.Services;
 
 namespace ZeroStoreApp.CommandApplication.Handlers;
 
-public class ProductCommandHandler :
-    IRequestHandler<CreateProductCommand, ProductResponse?>,
-    IRequestHandler<UpdateProductCommand, ProductResponse?>,
-    IRequestHandler<DeleteProductCommand, ProductResponse?>,
+public class ProductCommandHandler(IUnitOfWork unitOfWork, IPublisher publisher, IMapper mapper) :
+    IRequestHandler<CreateProductCommand, Guid?>,
+    IRequestHandler<UpdateProductCommand, Guid?>,
+    IRequestHandler<DeleteProductCommand, Guid?>,
     IDisposable
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-    private readonly IPublisher _publisher;
-
-    public ProductCommandHandler(IUnitOfWork uow, IPublisher publisher, IMapper mapper)
-    {
-        _unitOfWork = uow;
-        _mapper = mapper;
-        _publisher = publisher;
-    }
-
     #region Dispose
     public void Dispose()
     {
@@ -35,7 +23,7 @@ public class ProductCommandHandler :
     {
         if (disposing)
         {
-            _unitOfWork.Dispose();
+            unitOfWork.Dispose();
         }
     }
     #endregion
@@ -45,24 +33,20 @@ public class ProductCommandHandler :
     /// </summary>
     /// <param name="request">Product information to be created</param>
     /// <param name="cancellationToken">cancelation token</param>
-    /// <returns>ProductResponse</returns>
-    public async Task<ProductResponse?> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    /// <returns><see cref="Guid"/> </returns>
+    public async Task<Guid?> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var product = _mapper.Map<Product>(request);
+        var product = mapper.Map<Product>(request);
 
-        await _unitOfWork.Products.AddAsync(product, cancellationToken);
+        await unitOfWork.Products.AddAsync(product, cancellationToken);
 
-        if (product == null || request == null) return null;
+        var @event = mapper.Map<CreateProductEvent>(product);
 
-        var response = _mapper.Map<ProductResponse>(product);
+        await publisher.Publish(@event, cancellationToken);
 
-        var @event = _mapper.Map<CreateProductEvent>(response);
-
-        await _publisher.Publish(@event, cancellationToken);
-
-        return response;
+        return product.Id;
     }
 
     /// <summary>
@@ -70,29 +54,24 @@ public class ProductCommandHandler :
     /// </summary>
     /// <param name="request">Product information to be created</param>
     /// <param name="cancellationToken">cancelation token</param>
-    /// <returns><see cref="ProductResponse"/> </returns>
-    public async Task<ProductResponse?> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
+    /// <returns><see cref="Guid"/> </returns>
+    public async Task<Guid?> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var product = await _unitOfWork.Products.GetByIdAsync(request.Id, cancellationToken);
+        var product = await unitOfWork.Products.GetByIdAsync(request.Id, cancellationToken);
 
-        if (product == null || request == null) return null;
+        if (product == null) return null;
 
-        product.Name = request.Name ?? string.Empty;
-        product.Description = request.Description ?? string.Empty;
-        product.Price = request.Price;
-        product.Stock = request.Stock;
+        product.Update(product);
 
-        await _unitOfWork.Products.UpdateAsync(product, cancellationToken);
+        await unitOfWork.Products.UpdateAsync(product, cancellationToken);
 
-        var response = _mapper.Map<ProductResponse>(product);
+        var @event = mapper.Map<UpdateProductEvent>(product);
 
-        var @event = _mapper.Map<UpdateProductEvent>(response);
+        await publisher.Publish(@event, cancellationToken);
 
-        await _publisher.Publish(@event, cancellationToken);
-
-        return response;
+        return product.Id;
     }
 
     /// <summary>
@@ -100,23 +79,21 @@ public class ProductCommandHandler :
     /// </summary>
     /// <param name="request">information of the product to be deleted</param>
     /// <param name="cancellationToken">cancelation token</param>
-    /// <returns><see cref="ProductResponse"/></returns>
-    public async Task<ProductResponse?> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
+    /// <returns><see cref="Guid"/></returns>
+    public async Task<Guid?> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
-        var product = await _unitOfWork.Products.GetByIdAsync(request.Id, cancellationToken);
+        var product = await unitOfWork.Products.GetByIdAsync(request.Id, cancellationToken);
 
-        await _unitOfWork.Products.DeleteAsync(request.Id, cancellationToken);
+        if (product == null) return null;
 
-        if (product == null || request == null) return null;
+        await unitOfWork.Products.DeleteAsync(request.Id, cancellationToken);
 
-        var response = _mapper.Map<ProductResponse>(product);
+        var @event = mapper.Map<DeleteProductEvent>(product);
 
-        var @event = _mapper.Map<DeleteProductEvent>(response);
+        await publisher.Publish(@event, cancellationToken);
 
-        await _publisher.Publish(@event, cancellationToken);
-
-        return response;
+        return product.Id;
     }
 }

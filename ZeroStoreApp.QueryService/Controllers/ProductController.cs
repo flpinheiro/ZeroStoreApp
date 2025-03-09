@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ZeroStoreApp.CrossCutting.Common;
 using ZeroStoreApp.CrossCutting.Constants;
@@ -14,19 +13,8 @@ namespace ZeroStoreApp.QueryService.Controllers;
 /// </summary>
 [Route("api/[controller]")]
 [ApiController]
-public class ProductController : ApiController
+public sealed class ProductController(IMediator mediator) : ApiController
 {
-    private readonly IMediator _mediator;
-
-    /// <summary>
-    /// Constructor for ProductController
-    /// </summary>
-    /// <param name="mediator"></param>
-    public ProductController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     /// <summary>
     /// Get a list of products with pagination
     /// </summary>
@@ -42,9 +30,9 @@ public class ProductController : ApiController
         var validator = new GetPaginatedProductsQueryValidator();
         var validatorResult = await validator.ValidateAsync(query, cancellationToken);
 
-        if(!validatorResult.IsValid) return BadRequest(validatorResult.Errors, ResponseMessages.ValidationFailed);
+        if (!validatorResult.IsValid) return BadRequest(validatorResult.Errors, ResponseMessages.ValidationFailed);
 
-        var response = await _mediator.Send(query, cancellationToken);
+        var response = await mediator.Send(query, cancellationToken);
 
         return Ok(response, ResponseMessages.Products.PaginatedProductsRetrieved, response.Count);
     }
@@ -59,18 +47,18 @@ public class ProductController : ApiController
     [ProducesResponseType(typeof(ApiResponseWithData<ProductResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse), StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetProduct(Guid id, CancellationToken cancellationToken) 
+    public async Task<IActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
     {
         var query = new GetProductQuery { Id = id };
         var validator = new GetProductQueryValidator();
 
         var validatorResult = await validator.ValidateAsync(query, cancellationToken);
 
-        if(!validatorResult.IsValid) return BadRequest(validatorResult.Errors, ResponseMessages.ValidationFailed);
+        if (!validatorResult.IsValid) return BadRequest(validatorResult.Errors, ResponseMessages.ValidationFailed);
 
-        var product = await _mediator.Send(query, cancellationToken);
+        var product = await mediator.Send(query, cancellationToken);
 
-        if(product is null) return NotFound();
+        if (product is null) return NotFound();
 
         return Ok(product, ResponseMessages.Products.ProductRetrieved, product.Id);
     }
