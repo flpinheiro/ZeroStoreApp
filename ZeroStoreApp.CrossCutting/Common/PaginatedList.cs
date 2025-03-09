@@ -10,7 +10,8 @@ public class PaginatedList<T> : List<T>
     public bool HasNext => CurrentPage < TotalPages;
 
     public PaginatedList() { }
-    public PaginatedList(IEnumerable<T> items, int count, int pageNumber, int pageSize)
+    public PaginatedList(IEnumerable<T> items, int count, PaginatedRequest request) : this(items, count, request.Page, request.PageSize) { }
+    public PaginatedList(IEnumerable<T> items, int count, int pageNumber, int pageSize) : this()
     {
         TotalCount = count;
         PageSize = pageSize;

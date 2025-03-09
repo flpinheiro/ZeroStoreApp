@@ -16,6 +16,11 @@ public static class ResponseMessages
         public const string ProductRetrieved = "Product retrieved {0} with Sucessufull";
     }
 
+    public static class Orders 
+    {
+        public const string OrderRetrieved = "Order retrieved {0} with sucess";
+    }
+
 
     public const string ValidationFailed = "Validation failed";
 
